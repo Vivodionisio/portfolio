@@ -1,0 +1,85 @@
+/* Initial state */
+
+.phantum-element {
+  cursor: pointer;
+}
+
+.motion {
+  /* visibility: hidden; */
+  opacity: 0;
+  stroke-width: 50px;
+
+  cursor: pointer;
+}
+
+.stickman-1 {
+  cursor: pointer;
+}
+.stickman-1,
+.shadow-1 {
+  opacity: 1;
+}
+
+.stickman-2,
+.stickman-3,
+.stickman-4,
+.stickman-5,
+.stickman-6,
+.stickman-7,
+.stickman-8,
+.stickman-9,
+.stickman-9-blink,
+.stickman-9-eyes-left,
+.stickman-r-1,
+.stickman-r-2,
+.stickman-hips,
+.shadow-2,
+.shadow-3,
+.shadow-4,
+.shadow-5,
+.shadow-6,
+.shadow-7,
+.shadow-8,
+.shadow-9,
+.shadow-morph-1,
+.shadow-morph-2,
+.shadow-morph-3,
+.shadow-morph-4 {
+  opacity: 0;
+}
+
+.bag-1 {
+  opacity: 1;
+}
+
+.bag-2,
+.bag-3,
+.bag-4,
+.bag-shadow-2,
+.bag-shadow-3,
+.bag-shadow-4,
+.bag-shadow-d-1,
+.bag-shadow-d-2 {
+  opacity: 0;
+}
+
+.html5,
+.css3,
+.sass,
+.javascript,
+.api,
+.npm,
+.github,
+.svg,
+.greensock,
+.react {
+  transform: scale(0.7);
+  visibility: hidden;
+  fill: hsla(0, 0%, 20%, 1);
+  /* fill: rgb(62 223 242); */
+  cursor: pointer;
+}
+
+.img-overlay {
+  opacity: 0;
+}
