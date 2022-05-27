@@ -125,6 +125,16 @@ g#columns,
   stroke: lightgrey;
 }
 
+.react-time-elapsed {
+  display: none;
+}
+.react:hover .react-time-elapsed {
+  height: 50px;
+  width: 200px;
+  background: red;
+  display: inline-block;
+}
+
 @media screen and (max-width: 1450px) {
   .page .scene svg {
     right: unset;

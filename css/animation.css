@@ -86,3 +86,10 @@
 .img-overlay {
   opacity: 0;
 }
+
+.time-elapsed {
+  background-color: grey;
+  height: 30px;
+  width: 200px;
+  display: none;
+}

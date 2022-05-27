@@ -11,7 +11,7 @@ function blink() {
         delay: 0.15,
         onComplete: () => {
           const num = gsap.utils.random(2, 6, 0.1)
-          console.log(num)
+          // console.log(num)
           gsap.delayedCall(num, blink)
         }
       }
@@ -31,7 +31,7 @@ function shake() {
       defaults: { duration: 0 },
       onComplete: () => {
         const num = gsap.utils.random(2, 6, 0.1)
-        console.log(num)
+        // console.log(num)
         gsap.delayedCall(num, shake)
       }
     })
@@ -165,6 +165,19 @@ function bagOpens() {
   return tl
 }
 
+function sceneOverlay() {
+  const tl = gsap.timeline({ defaults: { duration: 1 } })
+
+  tl.to('.img-overlay', {
+    duration: 1,
+    opacity: 1
+  })
+    .to('.hill-1, .hill-2, .hill-3, .mountain ', { opacity: 0 }, 0)
+    .to('.title', { webkitTextFillColor: '#303030' }, 0)
+    .to('.greeting p', { color: '#303030' }, 0)
+  return tl
+}
+
 function fanOut() {
   gsap.set(
     '.html5, .css3, .sass, .javascript, .api, .npm, .github, .svg, .greensock, .react',
@@ -291,18 +304,57 @@ function fanOut() {
   return tl
 }
 
-function sceneOverlay() {
-  const tl = gsap.timeline({ defaults: { duration: 1 } })
+// function timeElapsed() {
+//   const tl = gsap.timeline({
+//     defaults: { xPercent: 20, yPercent: -125, tranformOrigin: 'bottom' }
+//   })
 
-  tl.to('.img-overlay', {
-    duration: 1,
-    opacity: 1
-  })
-    .to('.hill-1, .hill-2, .hill-3, .mountain ', { opacity: 0 }, 0)
-    .to('.title', { webkitTextFillColor: '#303030' }, 0)
-    .to('.greeting p', { color: '#303030' }, 0)
-  return tl
-}
+//   gsap.set('.react-time-elapsed', {
+//     rotation: '+=300',
+//     transformOrigin: '50% 50%'
+//   })
+
+//   tl.to(
+//     '.react-time-elapsed',
+//     {
+//       motionPath: {
+//         path: '.motion',
+//         align: '.motion',
+//         autoRotation: true,
+//         start: 0.1,
+//         end: 1
+//       }
+//     },
+//     '<10%'
+//   )
+//     .to(
+//       '.gsap-time-elapsed',
+//       {
+//         motionPath: {
+//           path: '.motion',
+//           align: '.motion',
+//           autoRotation: true,
+//           start: 0.1,
+//           end: 0.86
+//         }
+//       },
+//       '<10%'
+//     )
+//     .to(
+//       '.svg-time-elapsed',
+//       {
+//         motionPath: {
+//           path: '.motion',
+//           align: '.motion',
+//           autoRotation: true,
+//           start: 0.1,
+//           end: 0.7
+//         }
+//       },
+//       '<10%'
+//     )
+//   return tl
+// }
 
 // To rest state
 function toRest() {
