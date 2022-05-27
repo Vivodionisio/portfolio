@@ -1,89 +1,108 @@
-// gsap.registerPlugin(TextPlugin, MotionPathPlugin)
-
-// gsap.set(
-//   '.hill-1, .hill-2, .hill-3, .mountain, .stickman-1, .shadow-1, .bag-1, .bag-shadow-1',
-//   { autoAlpha: 0 }
-// )
-
-// const fadeIn = gsap.timeline({ defaults: { ease: 'power4.inOut' } })
-// fadeIn
-//   .to('.mountain, .mountain', { autoAlpha: 1, duration: 0.5, delay: 0.5 })
-//   .to('.hill-2, .mountain', { autoAlpha: 1, duration: 0.5 }, '<50%')
-//   .to('.hill-1, .mountain', { autoAlpha: 1, duration: 0.5 }, '<50%')
-//   .to('.hill-3, .mountain', { autoAlpha: 1, duration: 0.5 }, '<50%')
-//   .to('.stickman-1, .shadow-1', { autoAlpha: 1, duration: 0.5, stagger: 0.1 })
-//   .to('.bag-shadow-1, .bag-1', { autoAlpha: 1, duration: 0.5, stagger: 0.1 })
-
-// const hillsAlive = gsap.timeline({
-//   defaults: { duration: 5, ease: 'power2.inOut' }
-// })
-
-// hillsAlive
-//   .from(
-//     '.hill-2, .stickman-1, .shadow-1, .bag-1, .bag-shadow-1',
-//     {
-//       x: '40px'
-//     },
-//     0
-//   )
-//   .from('.hill-1', { xPercent: -20 }, 0)
-//   .from('.hill-3', { xPercent: 32 }, 0)
-//   .from('.mountain', { xPercent: 40 }, 0)
-
 // Blink
 
 function blink() {
-  if (master.progress() > 0) {
+  const allTweens = gsap.globalTimeline.getChildren()
+  if (allTweens.every(tween => !tween.isActive())) {
     const tl = gsap.timeline({ defaults: { duration: 0.1 } })
-    tl.to('.stickman-9-blink', { opacity: 1, delay: 0.5 }).to(
+    tl.set('.stickman-9-blink', { autoAlpha: 1, delay: 0.5 }).to(
       '.stickman-9-blink',
       {
-        opacity: 0,
+        autoAlpha: 0,
         delay: 0.15,
-        onComplete() {
-          gsap.delayedCall(gsap.utils.random(3, 5, 0.1), () => blink())
+        onComplete: () => {
+          const num = gsap.utils.random(2, 6, 0.1)
+          console.log(num)
+          gsap.delayedCall(num, blink)
         }
       }
     )
   } else {
     setTimeout(() => {
       blink()
-    }, 2000)
+    }, 3000)
+    return
+  }
+}
+
+function shake() {
+  const allTweens = gsap.globalTimeline.getChildren()
+  if (allTweens.every(tween => !tween.isActive())) {
+    const tl = gsap.timeline({
+      defaults: { duration: 0 },
+      onComplete: () => {
+        const num = gsap.utils.random(2, 6, 0.1)
+        console.log(num)
+        gsap.delayedCall(num, shake)
+      }
+    })
+    tl.to('.bag-1', { duration: 0.05, x: '-2%' })
+      .to('.bag-1', { duration: 0.05, x: '4%' })
+      .to('.bag-1', { duration: 0.05, x: '-4%' })
+      .to('.bag-1', { duration: 0.05, x: '4%' })
+      .to('.bag-1', { duration: 0.05, x: '-4%' })
+      .to('.bag-1', { duration: 0.05, x: '4%' })
+      .to('.bag-1', { duration: 0.05, x: '-4%' })
+      .to('.bag-1', { duration: 0.05, x: '2%' })
+  } else {
+    setTimeout(() => {
+      shake()
+    }, 3000)
     return
   }
 }
 
 // const hillsIntro = gsap.timeline({ defaults: { duration: 1 } })
 
+// function taDa() {
+//   const tl = gsap.timeline()
+//   tl.set('.stickman-1, .shadow-1', { opacity: 0, delay: 0.3 })
+//     .set('.stickman-2, .shadow-2', { opacity: 1 })
+//     .set('.stickman-2, .shadow-2', { opacity: 0 }, '>0.1')
+//     .set('.stickman-3, .shadow-3', { opacity: 1 })
+//     .set('.stickman-3, .shadow-3', { opacity: 0 }, '>0.4')
+//     .set('.stickman-4, .shadow-4', { opacity: 1 })
+//     .set('.stickman-4, .shadow-4', { opacity: 0 })
+//     .set('.stickman-5, .shadow-5', { opacity: 1 })
+//     .set('.stickman-5, .shadow-5', { opacity: 0 })
+//     .set('.stickman-6, .shadow-6', { opacity: 1 })
+//     .set('.stickman-6, .shadow-6', { opacity: 0 })
+//     .set('.stickman-7, .shadow-7', { opacity: 1 })
+//     .set('.stickman-7, .shadow-7', { opacity: 0 })
+//     .set('.stickman-8, .shadow-8', { opacity: 1 })
+//     .set('.stickman-8, .shadow-8', { opacity: 0 }, '>0.1')
+//     .set('.stickman-9, .shadow-9', { opacity: 1 })
+//   // duration 0.9
+//   return tl
+// }
+
 function taDa() {
-  const tl = gsap.timeline({
-    defaults: { duration: 0 }
-  })
-  tl.to('.stickman-1, .shadow-1', { opacity: 0, delay: 0.3 })
-    .to('.stickman-2, .shadow-2', { opacity: 1 })
-    .to('.stickman-2, .shadow-2', { opacity: 0, delay: 0.1 })
-    .to('.stickman-3, .shadow-3', { opacity: 1 })
-    .to('.stickman-3, .shadow-3', { opacity: 0, delay: 0.4 })
-    .to('.stickman-4, .shadow-4', { opacity: 1 })
-    .to('.stickman-4, .shadow-4', { opacity: 0, delay: 0 })
-    .to('.stickman-5, .shadow-5', { opacity: 1 })
-    .to('.stickman-5, .shadow-5', { opacity: 0, delay: 0 })
-    .to('.stickman-6, .shadow-6', { opacity: 1 })
-    .to('.stickman-6, .shadow-6', { opacity: 0, delay: 0 })
-    .to('.stickman-7, .shadow-7', { opacity: 1 })
-    .to('.stickman-7, .shadow-7', { opacity: 0, delay: 0 })
-    .to('.stickman-8, .shadow-8', { opacity: 1 })
-    .to('.stickman-8, .shadow-8', { opacity: 0, delay: 0.1 })
-    .to('.stickman-9, .shadow-9', { opacity: 1 })
+  const tl = gsap.timeline()
+  tl.set('.stickman-1, .shadow-1', { autoAlpha: 0, delay: 0.3 })
+    .set('.stickman-2, .shadow-2', { autoAlpha: 1 })
+    .set('.stickman-2, .shadow-2', { autoAlpha: 0 }, '>0.1')
+    .set('.stickman-3, .shadow-3', { autoAlpha: 1 })
+    .set('.stickman-3, .shadow-3', { autoAlpha: 0 }, '>0.4')
+  for (let i = 4; i <= 7; i++) {
+    tl.to(`.stickman-${i}, .shadow-${i}`, {
+      duration: 0.001,
+      autoAlpha: 1,
+      repeat: 1,
+      repeatDelay: 0.01,
+      yoyo: true
+    })
+  }
+  tl.set('.stickman-8, .shadow-8', { autoAlpha: 1 })
+    .set('.stickman-8, .shadow-8', { autoAlpha: 0 }, '>0.1')
+    .set('.stickman-9, .shadow-9', { autoAlpha: 1 })
   // duration 0.9
   return tl
 }
 
 function lookLeft() {
   const tl = gsap.timeline({ defaults: { duration: 0 } })
-  tl.to('.stickman-9-eyes-left', { opacity: 1, delay: 1.3 }) // This bit needs to come after bag
-    .to('.stickman-9-eyes-left', { opacity: 0, delay: 0.4 })
-    .to('.stickman-9', { opacity: 1 })
+  tl.to('.stickman-9-eyes-left', { autoAlpha: 1, delay: 1.3 }) // This bit needs to come after bag
+    .to('.stickman-9-eyes-left', { autoAlpha: 0, delay: 0.4 })
+    .to('.stickman-9', { autoAlpha: 1 })
   return tl
 }
 
@@ -92,14 +111,14 @@ function shadowMorph() {
     defaults: { duration: 0, immediateRender: false }
   })
   // for some reason some delay is needed on shadow-9 tween
-  tl.to('.shadow-9', { opacity: 0 })
-    .to('.shadow-morph-1', { opacity: 1 })
-    .to('.shadow-morph-1', { opacity: 0, delay: 0.1 })
-    .to('.shadow-morph-2', { opacity: 1 })
-    .to('.shadow-morph-2', { opacity: 0, delay: 0.1 })
-    .to('.shadow-morph-3', { opacity: 1 })
-    .to('.shadow-morph-3', { opacity: 0, delay: 0.1 })
-    .to('.shadow-morph-4', { opacity: 1 })
+  tl.to('.shadow-9', { autoAlpha: 0 })
+    .to('.shadow-morph-1', { autoAlpha: 1 })
+    .to('.shadow-morph-1', { autoAlpha: 0, delay: 0.1 })
+    .to('.shadow-morph-2', { autoAlpha: 1 })
+    .to('.shadow-morph-2', { autoAlpha: 0, delay: 0.1 })
+    .to('.shadow-morph-3', { autoAlpha: 1 })
+    .to('.shadow-morph-3', { autoAlpha: 0, delay: 0.1 })
+    .to('.shadow-morph-4', { autoAlpha: 1 })
   return tl
 }
 
@@ -136,18 +155,17 @@ function bagOpens() {
     .to('.bag-1', { duration: 0.05, x: '4%' })
     .to('.bag-1', { duration: 0.05, x: '-4%' })
     .to('.bag-1', { duration: 0.05, x: '2%' })
-    .to('.bag-1, .bag-shadow-1', { opacity: 0 })
-    .to('.bag-2, .bag-shadow-2', { opacity: 1 })
-    .to('.bag-2, .bag-shadow-2', { opacity: 0, delay: 0.1 })
-    .to('.bag-3, .bag-shadow-3', { opacity: 1 })
-    .to('.bag-3, .bag-shadow-3', { opacity: 0, delay: 0.1 })
-    .to('.bag-4, .bag-shadow-4', { opacity: 1 })
+    .to('.bag-1, .bag-shadow-1', { autoAlpha: 0 })
+    .to('.bag-2, .bag-shadow-2', { autoAlpha: 1 })
+    .to('.bag-2, .bag-shadow-2', { autoAlpha: 0, delay: 0.1 })
+    .to('.bag-3, .bag-shadow-3', { autoAlpha: 1 })
+    .to('.bag-3, .bag-shadow-3', { autoAlpha: 0, delay: 0.1 })
+    .to('.bag-4, .bag-shadow-4', { autoAlpha: 1 })
   // duration 0.6
   return tl
 }
 
 function fanOut() {
-  gsap.registerPlugin(MotionPathPlugin)
   gsap.set(
     '.html5, .css3, .sass, .javascript, .api, .npm, .github, .svg, .greensock, .react',
     {
@@ -291,16 +309,16 @@ function toRest() {
   const tl = gsap.timeline({
     defaults: { duration: 0 }
   })
-  tl.to('.stickman-9', { opacity: 0, delay: 0.1 })
-    .to('.stickman-r-1', { opacity: 1 })
-    .to('.stickman-r-1', { opacity: 0, delay: 0.1 })
-    .to('.stickman-r-2', { opacity: 1 })
-    .to('.stickman-r-2', { opacity: 0, delay: 0.1 })
-    .to('.stickman-1', { opacity: 1 })
+  tl.to('.stickman-9', { autoAlpha: 0, delay: 0.1 })
+    .to('.stickman-r-1', { autoAlpha: 1 })
+    .to('.stickman-r-1', { autoAlpha: 0, delay: 0.1 })
+    .to('.stickman-r-2', { autoAlpha: 1 })
+    .to('.stickman-r-2', { autoAlpha: 0, delay: 0.1 })
+    .to('.stickman-1', { autoAlpha: 1 })
   return tl
 }
 
-const master = gsap.timeline({ paused: true })
+const master = gsap.timeline({ paused: true, onComplete: blink })
 
 master
   .add(taDa()) // 0.9
@@ -313,13 +331,22 @@ master
   .add(toRest())
 
 blink()
+shake()
 
 const phantumElement = document.querySelector('.phantum-element')
-phantumElement.addEventListener('mouseenter', () => {
-  console.log('hi')
-  master.play()
+const bagElement = document.querySelector('.bag-1')
+const eleArray = [phantumElement, bagElement]
+eleArray.forEach(ele => {
+  ele.addEventListener('mouseenter', () => {
+    master.play()
+  })
 })
+// phantumElement.addEventListener('mouseenter', () => {
 
+// })
+
+// console.log()
+// gsap.globalTimeline.getChildren().filter(tween => tween.isActive())
 // ----
 
 // TODO: After animation is complete check if the mouse is in the phantum element, if it is not, then animate to rest position, if it is set up an onmouseleave event listener with a callback to animate figure to rest position.

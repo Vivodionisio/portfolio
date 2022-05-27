@@ -1,9 +1,5 @@
-:root {
-  --exibit-width: 100%;
-}
-
 .projects {
-  color: var(--dark-1);
+  color: var(--text-color);
   height: 100vh;
   min-height: 1600px;
 }
@@ -46,7 +42,7 @@
   position: absolute;
   top: 0;
   aspect-ratio: 2 / 1.2;
-  width: var(--exibit-width);
+  width: 100%;
   cursor: pointer;
   background-color: var(--primary);
   background-color: var(--dark-1);

@@ -5,8 +5,8 @@
 }
 
 .motion {
-  /* visibility: hidden; */
   opacity: 0;
+  visibility: hidden;
   stroke-width: 50px;
 
   cursor: pointer;
@@ -46,10 +46,12 @@
 .shadow-morph-3,
 .shadow-morph-4 {
   opacity: 0;
+  visibility: hidden;
 }
 
 .bag-1 {
   opacity: 1;
+  cursor: pointer;
 }
 
 .bag-2,
@@ -61,6 +63,7 @@
 .bag-shadow-d-1,
 .bag-shadow-d-2 {
   opacity: 0;
+  visibility: hidden;
 }
 
 .html5,

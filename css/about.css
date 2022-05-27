@@ -33,7 +33,7 @@ section.about .resume a {
 }
 
 section.about .resume a svg {
-  stroke: var(--dark-1);
+  stroke: var(--text-color);
   width: 18px;
   height: 18px;
   margin-left: 8px;
