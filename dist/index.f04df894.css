@@ -1,0 +1,63 @@
+section.about {
+  width: calc(100% - 160px);
+  height: 100vh;
+  min-height: 1290px;
+  text-align: center;
+  margin: auto;
+}
+
+section.about p {
+  width: 49%;
+  margin: auto;
+}
+
+section.about p:nth-child(3), section.about p:nth-child(4) {
+  margin-top: 75px;
+}
+
+section.about .resume {
+  margin: 75px auto auto;
+}
+
+section.about .resume a {
+  cursor: pointer;
+  background-color: #d3d3d3;
+  border: none;
+  border-radius: 1000px;
+  align-items: center;
+  padding: 10px 20px;
+  transition: background-color .5s;
+  display: inline-flex;
+}
+
+section.about .resume a svg {
+  stroke: var(--text-color);
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+}
+
+section.about .resume a:hover {
+  background-color: var(--primary);
+  transition: all .5s;
+}
+
+@media screen and (max-width: 1080px) {
+  section.about p {
+    min-width: 300px;
+  }
+}
+
+@media screen and (max-width: 935px) {
+  .page .container section.about {
+    min-height: 1280px;
+  }
+}
+
+@media screen and (max-width: 720) {
+  .page .container section.about {
+    width: calc(100% - 80px);
+  }
+}
+
+/*# sourceMappingURL=index.f04df894.css.map */

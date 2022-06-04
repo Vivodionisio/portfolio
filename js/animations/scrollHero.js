@@ -78,10 +78,9 @@ ScrollTrigger.matchMedia({
       scrollTrigger: {
         trigger: '.stickman-scene',
         start: 'top 30%',
-        markers: true,
+        // markers: true,
         onEnter: () => {
           if (gsap.getProperty('.stickman-scene', 'opacity') === 1) return
-          console.log('what')
           scene().play()
         }
       },

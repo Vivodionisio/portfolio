@@ -1,0 +1,44 @@
+.contact {
+  text-align: center;
+  color: inherit;
+  justify-content: center;
+  padding: 150px 80px;
+  display: flex;
+}
+
+.contact .left, .contact .right {
+  height: 500px;
+  width: 50%;
+}
+
+.contact .left {
+  display: flex;
+}
+
+.contact .right {
+  background-color: #9a9a9a;
+}
+
+.contact p a {
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: underline;
+  transition: color .5s;
+}
+
+.contact p a:hover {
+  color: var(--primary);
+  transition: color .5s;
+}
+
+@media screen and (max-width: 1080px) {
+  .contact {
+    justify-content: flex-start;
+  }
+
+  .contact p {
+    text-align: left;
+  }
+}
+
+/*# sourceMappingURL=index.b2be79b7.css.map */

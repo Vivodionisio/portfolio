@@ -99,6 +99,18 @@
   margin-left: 32%;
 }
 
+.icon-text {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.greensock-text {
+  fill: black;
+  font-weight: lighter;
+}
+
+/* font-family="robotoMono, monospace" font-size="20px" fill="black" x="50" y="50" */
+
 .mountain,
 .hill-3,
 .hill-2,
@@ -123,16 +135,6 @@ g#columns,
 
 .road-line {
   stroke: lightgrey;
-}
-
-.react-time-elapsed {
-  display: none;
-}
-.react:hover .react-time-elapsed {
-  height: 50px;
-  width: 200px;
-  background: red;
-  display: inline-block;
 }
 
 @media screen and (max-width: 1450px) {

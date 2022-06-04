@@ -88,8 +88,12 @@
 }
 
 .time-elapsed {
-  background-color: grey;
-  height: 30px;
-  width: 200px;
-  display: none;
+  /* background-color: var(--dark-1); */
+  color: var(--dark-1);
+  height: 25px;
+  width: 120px;
+  display: inline-block;
+  position: fixed;
+  /* opacity: 0;
+  visibility: hidden; */
 }

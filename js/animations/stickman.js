@@ -1,5 +1,8 @@
-// Blink
+import { formatDistance } from 'date-fns'
 
+gsap.registerPlugin(TextPlugin)
+
+// BLINK
 function blink() {
   const allTweens = gsap.globalTimeline.getChildren()
   if (allTweens.every(tween => !tween.isActive())) {
@@ -24,6 +27,7 @@ function blink() {
   }
 }
 
+// SHAKE
 function shake() {
   const allTweens = gsap.globalTimeline.getChildren()
   if (allTweens.every(tween => !tween.isActive())) {
@@ -75,6 +79,8 @@ function shake() {
 //   return tl
 // }
 
+// TA DA
+
 function taDa() {
   const tl = gsap.timeline()
   tl.set('.stickman-1, .shadow-1', { autoAlpha: 0, delay: 0.3 })
@@ -98,6 +104,7 @@ function taDa() {
   return tl
 }
 
+// LOOK LEFT
 function lookLeft() {
   const tl = gsap.timeline({ defaults: { duration: 0 } })
   tl.to('.stickman-9-eyes-left', { autoAlpha: 1, delay: 1.3 }) // This bit needs to come after bag
@@ -106,6 +113,7 @@ function lookLeft() {
   return tl
 }
 
+// SHADOW MORPH
 function shadowMorph() {
   const tl = gsap.timeline({
     defaults: { duration: 0, immediateRender: false }
@@ -122,6 +130,7 @@ function shadowMorph() {
   return tl
 }
 
+// BAG DISTORTS
 function bagDistorts() {
   const tl = gsap.timeline()
   gsap.set('.bag-1', { transformOrigin: 'bottom' })
@@ -142,6 +151,8 @@ function bagDistorts() {
   // duration 0.5
   return tl
 }
+
+// BAG OPENS
 
 function bagOpens() {
   const tl = gsap.timeline({
@@ -165,6 +176,7 @@ function bagOpens() {
   return tl
 }
 
+// SCENE OVERLAY
 function sceneOverlay() {
   const tl = gsap.timeline({ defaults: { duration: 1 } })
 
@@ -178,6 +190,7 @@ function sceneOverlay() {
   return tl
 }
 
+// FAN OUT
 function fanOut() {
   gsap.set(
     '.html5, .css3, .sass, .javascript, .api, .npm, .github, .svg, .greensock, .react',
@@ -193,57 +206,117 @@ function fanOut() {
       duration: 0.6,
       visibility: 'visible',
       ease: 'power.inOut'
-    }
+    },
+    onComplete: makeIconButtons
   })
 
   tl.to(
     '.react',
     {
-      scale: 1.08,
+      scale: 1.2,
       motionPath: {
         path: '.motion',
         align: '.motion',
         start: 0.1,
-        end: 1
+        end: 0.99
       }
     },
     1
   )
     .to(
-      '.greensock',
+      '.react-text',
       {
-        scale: 0.9,
+        scale: 1.1,
         motionPath: {
           path: '.motion',
           align: '.motion',
           start: 0.1,
-          end: 0.86
+          end: 0.99,
+          offsetX: 65,
+          offsetY: -8
+        }
+      },
+      0
+    )
+    .to(
+      '.greensock',
+      {
+        scale: 0.98,
+        motionPath: {
+          path: '.motion',
+          align: '.motion',
+          start: 0.1,
+          end: 0.84
         }
       },
       1
+    )
+    .to(
+      '.greensock-text',
+      {
+        scale: 1.05,
+        motionPath: {
+          path: '.motion',
+          align: '.motion',
+          start: 0.1,
+          end: 0.84,
+          offsetX: 55
+          // offsetY: -20
+        }
+      },
+      0
     )
     .to(
       '.svg',
       {
-        scale: 0.78,
+        scale: 0.86,
         motionPath: {
           path: '.motion',
           align: '.motion',
           start: 0.1,
-          end: 0.7
+          end: 0.68
         }
       },
       1
     )
     .to(
-      '.github',
+      '.svg-text',
       {
-        scale: 0.85,
+        // scale: 1,
         motionPath: {
           path: '.motion',
           align: '.motion',
           start: 0.1,
-          end: 0.58
+          end: 0.68,
+          offsetX: 45
+        }
+      },
+      0
+    )
+    .to(
+      '.github',
+      {
+        scale: 0.95,
+        motionPath: {
+          path: '.motion',
+          align: '.motion',
+          start: 0.1,
+          end: 0.549
+        }
+      },
+      1
+    )
+    .to(
+      '.github-text',
+      {
+        // scale: 0.95,
+        motionPath: {
+          path: '.motion',
+          align: '.motion',
+          start: 0.1,
+          end: 0.549,
+          offsetX: 45,
+          offsetY: -5
         }
       },
       1
@@ -251,12 +324,27 @@ function fanOut() {
     .to(
       '.npm',
       {
-        scale: 0.85,
+        scale: 0.86,
         motionPath: {
           path: '.motion',
           align: '.motion',
           start: 0.1,
-          end: 0.475
+          end: 0.44
+        }
+      },
+      1
+    )
+    .to(
+      '.npm-text',
+      {
+        // scale: 0.95,
+        motionPath: {
+          path: '.motion',
+          align: '.motion',
+          start: 0.1,
+          end: 0.44,
+          offsetX: 45,
+          offsetY: -10
         }
       },
       1
@@ -269,7 +357,22 @@ function fanOut() {
           path: '.motion',
           align: '.motion',
           start: 0.1,
-          end: 0.37
+          end: 0.34
+        }
+      },
+      1
+    )
+    .to(
+      '.api-text',
+      {
+        // scale: 0.85,
+        motionPath: {
+          path: '.motion',
+          align: '.motion',
+          start: 0.1,
+          end: 0.34,
+          offsetX: 45,
+          offsetY: -5
         }
       },
       1
@@ -277,12 +380,27 @@ function fanOut() {
     .to(
       '.javascript',
       {
-        scale: 0.71,
+        scale: 0.67,
         motionPath: {
           path: '.motion',
           align: '.motion',
           start: 0.1,
-          end: 0.238
+          end: 0.21
+        }
+      },
+      1
+    )
+    .to(
+      '.javascript-text',
+      {
+        // scale: 0.8,
+        motionPath: {
+          path: '.motion',
+          align: '.motion',
+          start: 0.1,
+          end: 0.21,
+          offsetX: 35,
+          offsetY: -5
         }
       },
       1
@@ -290,12 +408,27 @@ function fanOut() {
     .to(
       '.sass',
       {
-        scale: 0.75,
+        scale: 0.72,
         motionPath: {
           path: '.motion',
           align: '.motion',
           start: 0.1,
-          end: 0.12
+          end: 0.1
+        }
+      },
+      1
+    )
+    .to(
+      '.sass-text',
+      {
+        // scale: 0.8,
+        motionPath: {
+          path: '.motion',
+          align: '.motion',
+          start: 0.1,
+          end: 0.1,
+          offsetX: 35,
+          offsetY: -10
         }
       },
       1
@@ -304,57 +437,40 @@ function fanOut() {
   return tl
 }
 
-// function timeElapsed() {
-//   const tl = gsap.timeline({
-//     defaults: { xPercent: 20, yPercent: -125, tranformOrigin: 'bottom' }
-//   })
+const svgTextEles = gsap.utils.toArray('.icon-text')
+const icons = gsap.utils.toArray('.tech-icon')
 
-//   gsap.set('.react-time-elapsed', {
-//     rotation: '+=300',
-//     transformOrigin: '50% 50%'
-//   })
+function type(ele, rect, ms, words) {
+  const tl = gsap.timeline({ defaults: { transformOrigin: 'left' } })
 
-//   tl.to(
-//     '.react-time-elapsed',
-//     {
-//       motionPath: {
-//         path: '.motion',
-//         align: '.motion',
-//         autoRotation: true,
-//         start: 0.1,
-//         end: 1
-//       }
-//     },
-//     '<10%'
-//   )
-//     .to(
-//       '.gsap-time-elapsed',
-//       {
-//         motionPath: {
-//           path: '.motion',
-//           align: '.motion',
-//           autoRotation: true,
-//           start: 0.1,
-//           end: 0.86
-//         }
-//       },
-//       '<10%'
-//     )
-//     .to(
-//       '.svg-time-elapsed',
-//       {
-//         motionPath: {
-//           path: '.motion',
-//           align: '.motion',
-//           autoRotation: true,
-//           start: 0.1,
-//           end: 0.7
-//         }
-//       },
-//       '<10%'
-//     )
-//   return tl
-// }
+  tl.to(ele, { text: ms }).to(ele, { text: words }).reversed(true)
+
+  return tl
+}
+
+function makeIconButtons() {
+  console.log('hi buttons')
+  icons.forEach((icon, idx) => {
+    const rect = icon.getBoundingClientRect()
+    const textEle = svgTextEles[idx]
+    // const div = divs[idx]
+    const dateBegan = textEle.getAttribute('data-time-elapsed')
+    console.log(dateBegan)
+    // get time elapsed
+    const prevTime = new Date(dateBegan)
+    const thisTime = new Date()
+    const diffMs = thisTime.getTime() - prevTime.getTime()
+    const diffInWords = formatDistance(prevTime, thisTime)
+
+    icon.anim = type(textEle, rect, diffMs, diffInWords)
+    icon.addEventListener('mouseenter', () => {
+      icon.anim.reversed(!icon.anim.reversed())
+    })
+    icon.addEventListener('mouseleave', () => {
+      icon.anim.reversed(!icon.anim.reversed())
+    })
+  })
+}
 
 // To rest state
 function toRest() {
