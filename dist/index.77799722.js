@@ -571,7 +571,6 @@ ScrollTrigger.matchMedia({
             scrollTrigger: {
                 trigger: ".stickman-scene",
                 start: "top 30%",
-                // markers: true,
                 onEnter: ()=>{
                     if (gsap.getProperty(".stickman-scene", "opacity") === 1) return;
                     scene().play();
@@ -580,6 +579,7 @@ ScrollTrigger.matchMedia({
             autoAlpha: 1,
             duration: 0.5
         });
+        greeting().play();
     },
     // Desktop
     "(min-width: 935px)": ()=>{
@@ -588,6 +588,7 @@ ScrollTrigger.matchMedia({
             autoAlpha: 1
         });
         scene().play();
+        greeting().play().delay(0.5);
     }
 });
 
