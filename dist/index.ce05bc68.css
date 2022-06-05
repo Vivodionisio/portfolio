@@ -96,6 +96,10 @@
   transform: translateY(-65%);
 }
 
+.tech-icon {
+  pointer-events: bounding-box;
+}
+
 .icon-text {
   cursor: pointer;
   font-size: 18px;
