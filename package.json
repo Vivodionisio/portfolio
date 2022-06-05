@@ -2,10 +2,9 @@
   "source": "index.html",
   "name": "my-portfilio-simple",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build"
   },
   "repository": {
     "type": "git",
