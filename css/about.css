@@ -3,10 +3,17 @@ section.about {
   margin: auto;
   height: 100vh;
   min-height: 1290px;
+  min-height: 1384px;
   text-align: center;
 }
 
-section.about p {
+section.about h3 {
+  margin-top: 100px;
+}
+
+section.about p,
+section.about span {
+  font-size: 0.9rem;
   width: 49%;
   margin: auto;
   /* text-align: center; */
@@ -14,11 +21,12 @@ section.about p {
 
 section.about p:nth-child(3),
 section.about p:nth-child(4) {
-  margin-top: 75px;
+  margin-top: 27px;
+  margin-bottom: 27px;
 }
 section.about .resume {
   margin: auto;
-  margin-top: 75px;
+  margin-top: 100px;
 }
 
 section.about .resume a {
@@ -46,13 +54,13 @@ section.about .resume a:hover {
 
 @media screen and (max-width: 1080px) {
   section.about p {
-    min-width: 300px;
+    min-width: 238px;
   }
 }
 
 @media screen and (max-width: 935px) {
   .page .container section.about {
-    min-height: 1280px;
+    min-height: 1620px;
   }
 }
 

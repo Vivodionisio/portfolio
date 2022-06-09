@@ -15,6 +15,8 @@
   color: var(--text-color);
   width: 100%;
   z-index: 500;
+  visibility: hidden;
+  opacity: 0;
   justify-content: space-between;
   padding: 20px 25px 0;
   display: flex;
@@ -64,6 +66,8 @@
 
 .greeting h1 {
   height: 95px;
+  visibility: hidden;
+  opacity: 0;
   margin-bottom: .1em;
   font-family: robotoMono;
   font-size: 4.5rem;
@@ -73,6 +77,8 @@
 
 .greeting p {
   width: 471px;
+  visibility: hidden;
+  opacity: 0;
   font-size: 1rem;
 }
 
@@ -206,7 +212,6 @@ g#columns, #columns1, #columns2, #columns3 {
 @media screen and (max-width: 600px) {
   .greeting {
     left: 40px;
-    transform: scale(.8);
   }
 
   .greeting p {

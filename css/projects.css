@@ -1,7 +1,6 @@
 .projects {
   color: var(--text-color);
-  height: 100vh;
-  min-height: 1600px;
+  height: max-content;
 }
 
 /* the following target left and right divs */
@@ -86,7 +85,7 @@
   position: absolute;
 }
 
-.exibit .right .board img.fb-small_screen {
+.exibit .board img.fb-small_screen {
   position: absolute;
   width: 32%;
   height: auto;
@@ -96,7 +95,7 @@
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.263);
 }
 
-.exibit .right .board .fb-engagements {
+.exibit .board .fb-engagements {
   position: absolute;
   width: 44%;
   height: auto;

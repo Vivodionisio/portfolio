@@ -19,6 +19,10 @@
   background-color: #9a9a9a;
 }
 
+.contact p {
+  font-size: .9rem;
+}
+
 .contact p a {
   cursor: pointer;
   font-weight: 500;
@@ -33,11 +37,7 @@
 
 @media screen and (max-width: 1080px) {
   .contact {
-    justify-content: flex-start;
-  }
-
-  .contact p {
-    text-align: left;
+    justify-content: center;
   }
 }
 

@@ -561,28 +561,6 @@ function shake() {
         }, 0.25);
     }
 }
-// const hillsIntro = gsap.timeline({ defaults: { duration: 1 } })
-// function taDa() {
-//   const tl = gsap.timeline()
-//   tl.set('.stickman-1, .shadow-1', { opacity: 0, delay: 0.3 })
-//     .set('.stickman-2, .shadow-2', { opacity: 1 })
-//     .set('.stickman-2, .shadow-2', { opacity: 0 }, '>0.1')
-//     .set('.stickman-3, .shadow-3', { opacity: 1 })
-//     .set('.stickman-3, .shadow-3', { opacity: 0 }, '>0.4')
-//     .set('.stickman-4, .shadow-4', { opacity: 1 })
-//     .set('.stickman-4, .shadow-4', { opacity: 0 })
-//     .set('.stickman-5, .shadow-5', { opacity: 1 })
-//     .set('.stickman-5, .shadow-5', { opacity: 0 })
-//     .set('.stickman-6, .shadow-6', { opacity: 1 })
-//     .set('.stickman-6, .shadow-6', { opacity: 0 })
-//     .set('.stickman-7, .shadow-7', { opacity: 1 })
-//     .set('.stickman-7, .shadow-7', { opacity: 0 })
-//     .set('.stickman-8, .shadow-8', { opacity: 1 })
-//     .set('.stickman-8, .shadow-8', { opacity: 0 }, '>0.1')
-//     .set('.stickman-9, .shadow-9', { opacity: 1 })
-//   // duration 0.9
-//   return tl
-// }
 // TA DA
 function taDa() {
     const tl = gsap.timeline();
@@ -612,7 +590,6 @@ function taDa() {
     }, ">0.1").set(".stickman-9, .shadow-9", {
         autoAlpha: 1
     });
-    // duration 0.9
     return tl;
 }
 // LOOK LEFT
@@ -642,7 +619,6 @@ function shadowMorph() {
             immediateRender: false
         }
     });
-    // for some reason some delay is needed on shadow-9 tween
     tl.to(".shadow-9", {
         autoAlpha: 0
     }).to(".shadow-morph-1", {
@@ -913,9 +889,10 @@ function fanOut() {
     }, 1);
     return tl;
 }
+// Populating text elements for each tool (see FAN OUT)
 const svgTextEles = gsap.utils.toArray(".icon-text");
 const icons = gsap.utils.toArray(".tech-icon");
-function type(ele, rect, ms, words) {
+function type(ele, ms, words) {
     const tl = gsap.timeline({
         defaults: {
             transformOrigin: "left"
@@ -931,17 +908,16 @@ function type(ele, rect, ms, words) {
 function makeIconButtons() {
     console.log("hi buttons");
     icons.forEach((icon, idx)=>{
-        const rect = icon.getBoundingClientRect();
         const textEle = svgTextEles[idx];
-        // const div = divs[idx]
         const dateBegan = textEle.getAttribute("data-time-elapsed");
         console.log(dateBegan);
         // get time elapsed
         const prevTime = new Date(dateBegan);
         const thisTime = new Date();
         const diffMs = thisTime.getTime() - prevTime.getTime();
-        const diffInWords = (0, _dateFns.formatDistance)(prevTime, thisTime);
-        icon.anim = type(textEle, rect, diffMs, diffInWords);
+        const diffInWords = `${(0, _dateFns.formatDistance)(prevTime, thisTime)} exp.` // date-fns
+        ;
+        icon.anim = type(textEle, diffMs, diffInWords);
         icon.addEventListener("mouseenter", ()=>{
             icon.anim.reversed(!icon.anim.reversed());
         });
@@ -987,6 +963,7 @@ master.add(taDa()) // 0.9
 .add(sceneOverlay(), "-=1.9").add(fanOut(), "-=2.9").add(toRest());
 blink();
 shake();
+// Event Listener
 const phantumElement = document.querySelector(".phantum-element");
 const bagElement = document.querySelector(".bag-1");
 const eleArray = [

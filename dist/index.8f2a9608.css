@@ -1,7 +1,6 @@
 .projects {
   color: var(--text-color);
-  height: 100vh;
-  min-height: 1600px;
+  height: max-content;
 }
 
 .projects .exibit:nth-child(2n) > div:first-child {
@@ -83,7 +82,7 @@
   position: absolute;
 }
 
-.exibit .right .board img.fb-small_screen {
+.exibit .board img.fb-small_screen {
   width: 32%;
   height: auto;
   border-radius: 6px;
@@ -93,7 +92,7 @@
   box-shadow: 0 0 8px #00000043;
 }
 
-.exibit .right .board .fb-engagements {
+.exibit .board .fb-engagements {
   width: 44%;
   height: auto;
   position: absolute;

@@ -1,9 +1,11 @@
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger)
+import { shake } from './stickman'
 
 gsap.set('.stickman-scene', { autoAlpha: 0 })
 gsap.set('.phantum-element, .bag-1', { pointerEvents: 'none' })
+
 function scene() {
-  const tl = gsap.timeline({ defaults: { duration: 1 } })
+  const tl = gsap.timeline({ defaults: { duration: 1 }, onComplete: shake })
   tl.from(
     '.hill-1',
     {
@@ -58,12 +60,13 @@ function scene() {
 
 function greeting() {
   const tl = gsap.timeline()
+  gsap.set('.greeting h1, .greeting p', { autoAlpha: 1 })
   tl.from('.greeting h1, .greeting p', {
     autoAlpha: 0,
     y: '50px',
     stagger: 0.1,
     ease: 'elastic.out(1.5, 0.75)'
-  }).from('.topbar', { autoAlpha: 0, duration: 1 }, '<')
+  }).to('.topbar', { autoAlpha: 1, duration: 1 }, '<')
 
   return tl
 }
