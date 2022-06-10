@@ -1,4 +1,5 @@
-import { formatDistance } from 'date-fns'
+// import { formatDistanceToNow } from 'date-fns'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 gsap.registerPlugin(TextPlugin)
 
@@ -425,16 +426,17 @@ function type(ele, ms, words) {
 }
 
 function makeIconButtons() {
-  console.log('hi buttons')
   icons.forEach((icon, idx) => {
     const textEle = svgTextEles[idx]
     const dateBegan = textEle.getAttribute('data-time-elapsed')
-    console.log(dateBegan)
+    console.log(`date began ${dateBegan}`)
     // get time elapsed
     const prevTime = new Date(dateBegan)
     const thisTime = new Date()
+    console.log(`prev time: ${prevTime.getTime()}`)
+    console.log(`time now: ${thisTime.getTime()}`)
     const diffMs = thisTime.getTime() - prevTime.getTime()
-    const diffInWords = `${formatDistance(prevTime, thisTime)} exp.` // date-fns
+    const diffInWords = `${formatDistanceToNow(prevTime)} exp.` // date-fns
 
     icon.anim = type(textEle, diffMs, diffInWords)
     icon.addEventListener('mouseenter', () => {
