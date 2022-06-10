@@ -142,14 +142,14 @@
       this[globalName] = mainExports;
     }
   }
-})({"a3w2e":[function(require,module,exports) {
+})({"gkZwO":[function(require,module,exports) {
 "use strict";
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "13b864185d48e118";
+module.bundle.HMR_BUNDLE_ID = "3ba154a7373584a1";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, importScripts */ /*::
 import type {
   HMRAsset,
@@ -502,83 +502,50 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"iNhH1":[function(require,module,exports) {
+},{}],"kB96Y":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-// Interval SHAKE
-parcelHelpers.export(exports, "shake", ()=>shake);
-// import { formatDistanceToNow } from 'date-fns'
-var _formatDistanceToNow = require("date-fns/formatDistanceToNow");
-var _formatDistanceToNowDefault = parcelHelpers.interopDefault(_formatDistanceToNow);
-gsap.registerPlugin(TextPlugin);
-// interval BLINK
-function blink() {
-    const allTweens = gsap.globalTimeline.getChildren();
-    if (allTweens.every((tween)=>!tween.isActive())) {
-        const tl = gsap.timeline({
-            defaults: {
-                duration: 0.1
-            }
-        });
-        tl.set(".stickman-9-blink", {
-            autoAlpha: 1,
-            delay: 0.5
-        }).to(".stickman-9-blink", {
-            autoAlpha: 0,
-            delay: 0.15,
-            onComplete: ()=>{
-                const num = gsap.utils.random(2, 6, 0.1);
-                // console.log(num)
-                gsap.delayedCall(num, blink);
-            }
-        });
-    } else {
-        setTimeout(()=>{
-            blink();
-        }, 3000);
-        return;
-    }
-}
-function shake() {
-    if (master.progress() > 0) return;
-    const allTweens = gsap.globalTimeline.getChildren();
-    if (allTweens.every((tween)=>!tween.isActive())) {
-        const tl = gsap.timeline({
-            repeat: 1,
-            onComplete: ()=>{
-                gsap.delayedCall(10, shake);
-            }
-        });
-        tl.to(".bag-1", {
-            duration: 0.25,
-            ease: "back.out(4)",
-            scaleX: 1.2,
-            scaleY: 0.9
-        }, 0).to(".bag-1", {
-            duration: 0.25,
-            ease: "back.out(4)",
-            scaleX: 1,
-            scaleY: 1
-        }, 0.25).set(".bag-shadow-1", {
-            autoAlpha: 0
-        }, 0).set(".bag-shadow-d-1", {
-            autoAlpha: 1
-        }, ">").set(".bag-shadow-d-1", {
-            autoAlpha: 0
-        }, 0.15).set(".bag-shadow-d-2", {
-            autoAlpha: 1
-        }, ">").set(".bag-shadow-d-2", {
-            autoAlpha: 0
-        }, 0.24).set(".bag-shadow-d-1", {
-            autoAlpha: 1
-        }, ">").set(".bag-shadow-d-1", {
-            autoAlpha: 0
-        }, 0.33).set(".bag-shadow-1", {
-            autoAlpha: 1
-        }, ">");
-    }
-}
-// TA DA
+parcelHelpers.export(exports, "master", ()=>master);
+var _tada = require("./tada");
+var _fanout = require("./fanout");
+var _blink = require("./blink");
+var _bounce = require("./bounce");
+var _shadowMorph = require("./shadow_morph");
+var _bag = require("./bag");
+var _overlay = require("./overlay");
+var _toRest = require("./to_rest");
+const master = gsap.timeline({
+    paused: true,
+    onComplete: (0, _blink.blink)
+});
+master.add((0, _tada.taDa)()) // 0.9
+.add((0, _bag.bagDistorts)()) // 0.5
+.add((0, _bag.bagOpens)(), "-=0.4") // 0.6 //'-=0.4'
+.add((0, _shadowMorph.shadowMorph)(), "-=0.2") //0.301
+.add((0, _tada.lookLeft)()) // 1.7
+.add((0, _overlay.overlay)(), "-=1.9").add((0, _fanout.fanOut)(), "-=2.9").add((0, _toRest.toRest)());
+(0, _blink.blink)();
+setTimeout(()=>{
+    (0, _bounce.bounce)();
+}, 3000);
+// Event Listener
+const phantumElement = document.querySelector(".phantum-element");
+const bagElement = document.querySelector(".bag-1");
+const eleArray = [
+    phantumElement,
+    bagElement
+];
+eleArray.forEach((ele)=>{
+    ele.addEventListener("mouseenter", ()=>{
+        master.play();
+    });
+});
+
+},{"./tada":"bU9V8","./fanout":"7gO4I","./blink":"gKKXK","./bounce":"iEcuG","./shadow_morph":"d3YGf","./bag":"dfaA0","./overlay":"l7kp3","./to_rest":"eWK60","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bU9V8":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "taDa", ()=>taDa);
+parcelHelpers.export(exports, "lookLeft", ()=>lookLeft);
 function taDa() {
     const tl = gsap.timeline();
     tl.set(".stickman-1, .shadow-1", {
@@ -609,7 +576,6 @@ function taDa() {
     });
     return tl;
 }
-// LOOK LEFT
 function lookLeft() {
     const tl = gsap.timeline({
         defaults: {
@@ -628,141 +594,42 @@ function lookLeft() {
     });
     return tl;
 }
-// SHADOW MORPH
-function shadowMorph() {
-    const tl = gsap.timeline({
-        defaults: {
-            duration: 0,
-            immediateRender: false
-        }
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
     });
-    tl.to(".shadow-9", {
-        autoAlpha: 0
-    }).to(".shadow-morph-1", {
-        autoAlpha: 1
-    }).to(".shadow-morph-1", {
-        autoAlpha: 0,
-        delay: 0.1
-    }).to(".shadow-morph-2", {
-        autoAlpha: 1
-    }).to(".shadow-morph-2", {
-        autoAlpha: 0,
-        delay: 0.1
-    }).to(".shadow-morph-3", {
-        autoAlpha: 1
-    }).to(".shadow-morph-3", {
-        autoAlpha: 0,
-        delay: 0.1
-    }).to(".shadow-morph-4", {
-        autoAlpha: 1
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
     });
-    return tl;
-}
-// BAG DISTORTS
-function bagDistorts() {
-    const tl = gsap.timeline();
-    gsap.set(".bag-1", {
-        transformOrigin: "bottom"
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
     });
-    tl.to(".bag-1", {
-        duration: 0.25,
-        ease: "back.out(4)",
-        scaleX: 1.2,
-        scaleY: 0.9
-    }).to(".bag-1", {
-        duration: 0.25,
-        ease: "back.out(4)",
-        scaleX: 1,
-        scaleY: 1
-    }).set(".bag-shadow-1", {
-        autoAlpha: 0
-    }, 0).set(".bag-shadow-d-1", {
-        autoAlpha: 1
-    }, ">").set(".bag-shadow-d-1", {
-        autoAlpha: 0
-    }, 0.15).set(".bag-shadow-d-2", {
-        autoAlpha: 1
-    }, ">").set(".bag-shadow-d-2", {
-        autoAlpha: 0
-    }, 0.24).set(".bag-shadow-d-1", {
-        autoAlpha: 1
-    }, ">").set(".bag-shadow-d-1", {
-        autoAlpha: 0
-    }, 0.33).set(".bag-shadow-1", {
-        autoAlpha: 1
-    }, ">");
-    // duration 0.5
-    return tl;
-}
-// BAG OPENS
-function bagOpens() {
-    const tl = gsap.timeline({
-        defaults: {
-            duration: 0
-        }
-    });
-    tl.to(".bag-1", {
-        duration: 0.05,
-        x: "-2%"
-    }).to(".bag-1", {
-        duration: 0.05,
-        x: "4%"
-    }).to(".bag-1", {
-        duration: 0.05,
-        x: "-4%"
-    }).to(".bag-1", {
-        duration: 0.05,
-        x: "4%"
-    }).to(".bag-1", {
-        duration: 0.05,
-        x: "-4%"
-    }).to(".bag-1", {
-        duration: 0.05,
-        x: "4%"
-    }).to(".bag-1", {
-        duration: 0.05,
-        x: "-4%"
-    }).to(".bag-1", {
-        duration: 0.05,
-        x: "2%"
-    }).to(".bag-1, .bag-shadow-1", {
-        autoAlpha: 0
-    }).to(".bag-2, .bag-shadow-2", {
-        autoAlpha: 1
-    }).to(".bag-2, .bag-shadow-2", {
-        autoAlpha: 0,
-        delay: 0.1
-    }).to(".bag-3, .bag-shadow-3", {
-        autoAlpha: 1
-    }).to(".bag-3, .bag-shadow-3", {
-        autoAlpha: 0,
-        delay: 0.1
-    }).to(".bag-4, .bag-shadow-4", {
-        autoAlpha: 1
-    });
-    // duration 0.6
-    return tl;
-}
-// SCENE OVERLAY
-function sceneOverlay() {
-    const tl = gsap.timeline({
-        defaults: {
-            duration: 1
-        }
-    });
-    tl.to(".img-overlay", {
-        duration: 1,
-        opacity: 1
-    }).to(".hill-1, .hill-2, .hill-3, .mountain ", {
-        opacity: 0
-    }, 0).to(".title", {
-        webkitTextFillColor: "#303030"
-    }, 0).to(".greeting p", {
-        color: "#303030"
-    }, 0);
-    return tl;
-}
-// FAN OUT
+};
+
+},{}],"7gO4I":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "fanOut", ()=>fanOut);
+var _textAnim = require("./text_anim");
 function fanOut() {
     gsap.set(".html5, .css3, .sass, .javascript, .api, .npm, .github, .svg, .greensock, .react", {
         xPercent: -50,
@@ -775,7 +642,7 @@ function fanOut() {
             visibility: "visible",
             ease: "power.inOut"
         },
-        onComplete: makeIconButtons
+        onComplete: (0, _textAnim.makeIconButtons)
     });
     tl.to(".react", {
         scale: 1.2,
@@ -922,6 +789,15 @@ function fanOut() {
     }, 1);
     return tl;
 }
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./text_anim":"ftWIl"}],"ftWIl":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "makeIconButtons", ()=>makeIconButtons);
+var _formatDistanceToNow = require("date-fns/formatDistanceToNow");
+var _formatDistanceToNowDefault = parcelHelpers.interopDefault(_formatDistanceToNow);
+// import { formatDistanceToNow } from 'date-fns'
+gsap.registerPlugin(TextPlugin);
 // Populating text elements for each tool (see FAN OUT)
 const svgTextEles = gsap.utils.toArray(".icon-text");
 const icons = gsap.utils.toArray(".tech-icon");
@@ -957,89 +833,8 @@ function makeIconButtons() {
         });
     });
 }
-// To rest state
-function toRest() {
-    const tl = gsap.timeline({
-        defaults: {
-            duration: 0
-        }
-    });
-    tl.to(".stickman-9", {
-        autoAlpha: 0,
-        delay: 0.1
-    }).to(".stickman-r-1", {
-        autoAlpha: 1
-    }).to(".stickman-r-1", {
-        autoAlpha: 0,
-        delay: 0.1
-    }).to(".stickman-r-2", {
-        autoAlpha: 1
-    }).to(".stickman-r-2", {
-        autoAlpha: 0,
-        delay: 0.1
-    }).to(".stickman-1", {
-        autoAlpha: 1
-    });
-    return tl;
-}
-const master = gsap.timeline({
-    paused: true,
-    onComplete: blink
-});
-master.add(taDa()) // 0.9
-.add(bagDistorts()) // 0.5
-.add(bagOpens(), "-=0.4") // 0.6 //'-=0.4'
-.add(shadowMorph(), "-=0.2") //0.301
-.add(lookLeft()) // 1.7
-.add(sceneOverlay(), "-=1.9").add(fanOut(), "-=2.9").add(toRest());
-blink();
-setTimeout(()=>{
-    shake();
-}, 3000);
-// Event Listener
-const phantumElement = document.querySelector(".phantum-element");
-const bagElement = document.querySelector(".bag-1");
-const eleArray = [
-    phantumElement,
-    bagElement
-];
-eleArray.forEach((ele)=>{
-    ele.addEventListener("mouseenter", ()=>{
-        master.play();
-    });
-});
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","date-fns/formatDistanceToNow":"kV5oc"}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"kV5oc":[function(require,module,exports) {
+},{"date-fns/formatDistanceToNow":"kV5oc","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kV5oc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _indexJs = require("../formatDistance/index.js");
@@ -2023,6 +1818,257 @@ function getTimezoneOffsetInMilliseconds(date) {
 }
 exports.default = getTimezoneOffsetInMilliseconds;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["a3w2e","iNhH1"], "iNhH1", "parcelRequire3f98")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gKKXK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "blink", ()=>blink);
+function blink() {
+    const allTweens = gsap.globalTimeline.getChildren();
+    if (allTweens.every((tween)=>!tween.isActive())) {
+        const tl = gsap.timeline({
+            defaults: {
+                duration: 0.1
+            }
+        });
+        tl.set(".stickman-9-blink", {
+            autoAlpha: 1,
+            delay: 0.5
+        }).to(".stickman-9-blink", {
+            autoAlpha: 0,
+            delay: 0.15,
+            onComplete: ()=>{
+                const num = gsap.utils.random(2, 6, 0.1);
+                // console.log(num)
+                gsap.delayedCall(num, blink);
+            }
+        });
+    } else {
+        setTimeout(()=>{
+            blink();
+        }, 3000);
+        return;
+    }
+}
 
-//# sourceMappingURL=index.5d48e118.js.map
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iEcuG":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "bounce", ()=>bounce);
+var _master = require("./master");
+function bounce() {
+    if ((0, _master.master).progress() > 0) return;
+    const allTweens = gsap.globalTimeline.getChildren();
+    if (allTweens.every((tween)=>!tween.isActive())) {
+        const tl = gsap.timeline({
+            repeat: 1,
+            onComplete: ()=>{
+                gsap.delayedCall(10, bounce);
+            }
+        });
+        tl.to(".bag-1", {
+            duration: 0.25,
+            ease: "back.out(4)",
+            scaleX: 1.2,
+            scaleY: 0.9
+        }, 0).to(".bag-1", {
+            duration: 0.25,
+            ease: "back.out(4)",
+            scaleX: 1,
+            scaleY: 1
+        }, 0.25).set(".bag-shadow-1", {
+            autoAlpha: 0
+        }, 0).set(".bag-shadow-d-1", {
+            autoAlpha: 1
+        }, ">").set(".bag-shadow-d-1", {
+            autoAlpha: 0
+        }, 0.15).set(".bag-shadow-d-2", {
+            autoAlpha: 1
+        }, ">").set(".bag-shadow-d-2", {
+            autoAlpha: 0
+        }, 0.24).set(".bag-shadow-d-1", {
+            autoAlpha: 1
+        }, ">").set(".bag-shadow-d-1", {
+            autoAlpha: 0
+        }, 0.33).set(".bag-shadow-1", {
+            autoAlpha: 1
+        }, ">");
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./master":"kB96Y"}],"d3YGf":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "shadowMorph", ()=>shadowMorph);
+function shadowMorph() {
+    const tl = gsap.timeline({
+        defaults: {
+            duration: 0,
+            immediateRender: false
+        }
+    });
+    tl.to(".shadow-9", {
+        autoAlpha: 0
+    }).to(".shadow-morph-1", {
+        autoAlpha: 1
+    }).to(".shadow-morph-1", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".shadow-morph-2", {
+        autoAlpha: 1
+    }).to(".shadow-morph-2", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".shadow-morph-3", {
+        autoAlpha: 1
+    }).to(".shadow-morph-3", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".shadow-morph-4", {
+        autoAlpha: 1
+    });
+    return tl;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dfaA0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "bagDistorts", ()=>bagDistorts);
+parcelHelpers.export(exports, "bagOpens", ()=>bagOpens);
+function bagDistorts() {
+    const tl = gsap.timeline();
+    gsap.set(".bag-1", {
+        transformOrigin: "bottom"
+    });
+    tl.to(".bag-1", {
+        duration: 0.25,
+        ease: "back.out(4)",
+        scaleX: 1.2,
+        scaleY: 0.9
+    }).to(".bag-1", {
+        duration: 0.25,
+        ease: "back.out(4)",
+        scaleX: 1,
+        scaleY: 1
+    }).set(".bag-shadow-1", {
+        autoAlpha: 0
+    }, 0).set(".bag-shadow-d-1", {
+        autoAlpha: 1
+    }, ">").set(".bag-shadow-d-1", {
+        autoAlpha: 0
+    }, 0.15).set(".bag-shadow-d-2", {
+        autoAlpha: 1
+    }, ">").set(".bag-shadow-d-2", {
+        autoAlpha: 0
+    }, 0.24).set(".bag-shadow-d-1", {
+        autoAlpha: 1
+    }, ">").set(".bag-shadow-d-1", {
+        autoAlpha: 0
+    }, 0.33).set(".bag-shadow-1", {
+        autoAlpha: 1
+    }, ">");
+    return tl;
+}
+function bagOpens() {
+    const tl = gsap.timeline({
+        defaults: {
+            duration: 0
+        }
+    });
+    tl.to(".bag-1", {
+        duration: 0.05,
+        x: "-2%"
+    }).to(".bag-1", {
+        duration: 0.05,
+        x: "4%"
+    }).to(".bag-1", {
+        duration: 0.05,
+        x: "-4%"
+    }).to(".bag-1", {
+        duration: 0.05,
+        x: "4%"
+    }).to(".bag-1", {
+        duration: 0.05,
+        x: "-4%"
+    }).to(".bag-1", {
+        duration: 0.05,
+        x: "4%"
+    }).to(".bag-1", {
+        duration: 0.05,
+        x: "-4%"
+    }).to(".bag-1", {
+        duration: 0.05,
+        x: "2%"
+    }).to(".bag-1, .bag-shadow-1", {
+        autoAlpha: 0
+    }).to(".bag-2, .bag-shadow-2", {
+        autoAlpha: 1
+    }).to(".bag-2, .bag-shadow-2", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".bag-3, .bag-shadow-3", {
+        autoAlpha: 1
+    }).to(".bag-3, .bag-shadow-3", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".bag-4, .bag-shadow-4", {
+        autoAlpha: 1
+    });
+    // duration 0.6
+    return tl;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l7kp3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "overlay", ()=>overlay);
+function overlay() {
+    const tl = gsap.timeline({
+        defaults: {
+            duration: 1
+        }
+    });
+    tl.to(".img-overlay", {
+        duration: 1,
+        opacity: 1
+    }).to(".hill-1, .hill-2, .hill-3, .mountain ", {
+        opacity: 0
+    }, 0).to(".title", {
+        webkitTextFillColor: "#303030"
+    }, 0).to(".greeting p", {
+        color: "#303030"
+    }, 0);
+    return tl;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eWK60":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "toRest", ()=>toRest);
+function toRest() {
+    const tl = gsap.timeline({
+        defaults: {
+            duration: 0
+        }
+    });
+    tl.to(".stickman-9", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".stickman-r-1", {
+        autoAlpha: 1
+    }).to(".stickman-r-1", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".stickman-r-2", {
+        autoAlpha: 1
+    }).to(".stickman-r-2", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".stickman-1", {
+        autoAlpha: 1
+    });
+    return tl;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["gkZwO","kB96Y"], "kB96Y", "parcelRequire3f98")
+
+//# sourceMappingURL=index.373584a1.js.map

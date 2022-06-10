@@ -503,7 +503,7 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"hEjg9":[function(require,module,exports) {
-var _stickman = require("./stickman");
+var _master = require("./stickman/master");
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 gsap.set(".stickman-scene", {
     autoAlpha: 0
@@ -516,7 +516,7 @@ function scene() {
         defaults: {
             duration: 1
         },
-        onComplete: (0, _stickman.shake)
+        onComplete: (0, _master.bounce)
     });
     tl.from(".hill-1", {
         autoAlpha: 0,
@@ -597,6 +597,1572 @@ ScrollTrigger.matchMedia({
     }
 });
 
-},{"./stickman":"iNhH1"}]},["ln8Et","hEjg9"], "hEjg9", "parcelRequire3f98")
+},{"./stickman/master":"kB96Y"}],"kB96Y":[function(require,module,exports) {
+var _tada = require("./tada");
+var _fanout = require("./fanout");
+var _blink = require("./blink");
+var _bounce = require("./bounce");
+var _shadowMorph = require("./shadow_morph");
+var _bag = require("./bag");
+var _overlay = require("./overlay");
+var _toRest = require("./to_rest");
+// To rest state
+const master = gsap.timeline({
+    paused: true,
+    onComplete: (0, _blink.blink)
+});
+master.add((0, _tada.taDa)()) // 0.9
+.add((0, _bag.bagDistorts)()) // 0.5
+.add((0, _bag.bagOpens)(), "-=0.4") // 0.6 //'-=0.4'
+.add((0, _shadowMorph.shadowMorph)(), "-=0.2") //0.301
+.add((0, _tada.lookLeft)()) // 1.7
+.add((0, _overlay.overlay)(), "-=1.9").add((0, _fanout.fanOut)(), "-=2.9").add((0, _toRest.toRest)());
+(0, _blink.blink)();
+setTimeout(()=>{
+    (0, _bounce.bounce)();
+}, 3000);
+// Event Listener
+const phantumElement = document.querySelector(".phantum-element");
+const bagElement = document.querySelector(".bag-1");
+const eleArray = [
+    phantumElement,
+    bagElement
+];
+eleArray.forEach((ele)=>{
+    ele.addEventListener("mouseenter", ()=>{
+        master.play();
+    });
+}) // export default master
+;
+
+},{"./tada":"bU9V8","./fanout":"7gO4I","./blink":"gKKXK","./bounce":"iEcuG","./shadow_morph":"d3YGf","./bag":"dfaA0","./overlay":"l7kp3","./to_rest":"eWK60"}],"bU9V8":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "taDa", ()=>taDa);
+parcelHelpers.export(exports, "lookLeft", ()=>lookLeft);
+function taDa() {
+    const tl = gsap.timeline();
+    tl.set(".stickman-1, .shadow-1", {
+        autoAlpha: 0,
+        delay: 0.3
+    }).set(".stickman-2, .shadow-2", {
+        autoAlpha: 1
+    }).set(".stickman-2, .shadow-2", {
+        autoAlpha: 0
+    }, ">0.1").set(".stickman-3, .shadow-3", {
+        autoAlpha: 1
+    }).set(".stickman-3, .shadow-3", {
+        autoAlpha: 0
+    }, ">0.4");
+    for(let i = 4; i <= 7; i++)tl.to(`.stickman-${i}, .shadow-${i}`, {
+        duration: 0.001,
+        autoAlpha: 1,
+        repeat: 1,
+        repeatDelay: 0.01,
+        yoyo: true
+    });
+    tl.set(".stickman-8, .shadow-8", {
+        autoAlpha: 1
+    }).set(".stickman-8, .shadow-8", {
+        autoAlpha: 0
+    }, ">0.1").set(".stickman-9, .shadow-9", {
+        autoAlpha: 1
+    });
+    return tl;
+}
+function lookLeft() {
+    const tl = gsap.timeline({
+        defaults: {
+            duration: 0
+        }
+    });
+    tl.to(".stickman-9-eyes-left", {
+        autoAlpha: 1,
+        delay: 1.3
+    }) // This bit needs to come after bag
+    .to(".stickman-9-eyes-left", {
+        autoAlpha: 0,
+        delay: 0.4
+    }).to(".stickman-9", {
+        autoAlpha: 1
+    });
+    return tl;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"7gO4I":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "fanOut", ()=>fanOut);
+var _textAnim = require("./text_anim");
+function fanOut() {
+    gsap.set(".html5, .css3, .sass, .javascript, .api, .npm, .github, .svg, .greensock, .react", {
+        xPercent: -50,
+        yPercent: -50,
+        visibility: "hidden"
+    });
+    const tl = gsap.timeline({
+        defaults: {
+            duration: 0.6,
+            visibility: "visible",
+            ease: "power.inOut"
+        },
+        onComplete: (0, _textAnim.makeIconButtons)
+    });
+    tl.to(".react", {
+        scale: 1.2,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.99
+        }
+    }, 1).to(".react-text", {
+        scale: 1.1,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.99,
+            offsetX: 65,
+            offsetY: -8
+        }
+    }, 0).to(".greensock", {
+        scale: 0.98,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.84
+        }
+    }, 1).to(".greensock-text", {
+        scale: 1.05,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.84,
+            offsetX: 55
+        }
+    }, 0).to(".svg", {
+        scale: 0.86,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.68
+        }
+    }, 1).to(".svg-text", {
+        // scale: 1,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.68,
+            offsetX: 48
+        }
+    }, 0).to(".github", {
+        scale: 0.95,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.549
+        }
+    }, 1).to(".github-text", {
+        // scale: 0.95,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.549,
+            offsetX: 48,
+            offsetY: -5
+        }
+    }, 1).to(".npm", {
+        scale: 0.86,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.44
+        }
+    }, 1).to(".npm-text", {
+        // scale: 0.95,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.44,
+            offsetX: 49,
+            offsetY: -10
+        }
+    }, 1).to(".api", {
+        scale: 0.85,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.34
+        }
+    }, 1).to(".api-text", {
+        // scale: 0.85,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.34,
+            offsetX: 45,
+            offsetY: -5
+        }
+    }, 1).to(".javascript", {
+        scale: 0.67,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.21
+        }
+    }, 1).to(".javascript-text", {
+        // scale: 0.8,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.21,
+            offsetX: 38,
+            offsetY: -10
+        }
+    }, 1).to(".sass", {
+        scale: 0.72,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.1
+        }
+    }, 1).to(".sass-text", {
+        // scale: 0.8,
+        motionPath: {
+            path: ".motion",
+            align: ".motion",
+            start: 0.1,
+            end: 0.1,
+            offsetX: 35,
+            offsetY: -10
+        }
+    }, 1);
+    return tl;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./text_anim":"ftWIl"}],"ftWIl":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "makeIconButtons", ()=>makeIconButtons);
+var _formatDistanceToNow = require("date-fns/formatDistanceToNow");
+var _formatDistanceToNowDefault = parcelHelpers.interopDefault(_formatDistanceToNow);
+// import { formatDistanceToNow } from 'date-fns'
+gsap.registerPlugin(TextPlugin);
+// Populating text elements for each tool (see FAN OUT)
+const svgTextEles = gsap.utils.toArray(".icon-text");
+const icons = gsap.utils.toArray(".tech-icon");
+function type(ele, ms, words) {
+    const tl = gsap.timeline({
+        defaults: {
+            transformOrigin: "left"
+        }
+    });
+    tl.to(ele, {
+        text: ms
+    }).to(ele, {
+        text: words
+    }).reversed(true);
+    return tl;
+}
+function makeIconButtons() {
+    icons.forEach((icon, idx)=>{
+        const textEle = svgTextEles[idx];
+        const dateBegan = textEle.getAttribute("data-time-elapsed");
+        // get time elapsed
+        const prevTime = new Date(dateBegan);
+        const thisTime = new Date();
+        const diffMs = thisTime.getTime() - prevTime.getTime();
+        const diffInWords = `${(0, _formatDistanceToNowDefault.default)(prevTime)} exp.` // date-fns
+        ;
+        icon.anim = type(textEle, diffMs, diffInWords);
+        icon.addEventListener("mouseenter", ()=>{
+            icon.anim.reversed(!icon.anim.reversed());
+        });
+        icon.addEventListener("mouseleave", ()=>{
+            icon.anim.reversed(!icon.anim.reversed());
+        });
+    });
+}
+
+},{"date-fns/formatDistanceToNow":"kV5oc","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kV5oc":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../formatDistance/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+function formatDistanceToNow(dirtyDate, dirtyOptions) {
+    (0, _indexJsDefault1.default)(1, arguments);
+    return (0, _indexJsDefault.default)(dirtyDate, Date.now(), dirtyOptions);
+}
+exports.default = formatDistanceToNow;
+
+},{"../formatDistance/index.js":"lPnhm","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lPnhm":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../compareAsc/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../differenceInMonths/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../differenceInSeconds/index.js");
+var _indexJsDefault2 = parcelHelpers.interopDefault(_indexJs2);
+var _indexJs3 = require("../locale/en-US/index.js");
+var _indexJsDefault3 = parcelHelpers.interopDefault(_indexJs3);
+var _indexJs4 = require("../toDate/index.js");
+var _indexJsDefault4 = parcelHelpers.interopDefault(_indexJs4);
+var _indexJs5 = require("../_lib/cloneObject/index.js");
+var _indexJsDefault5 = parcelHelpers.interopDefault(_indexJs5);
+var _indexJs6 = require("../_lib/getTimezoneOffsetInMilliseconds/index.js");
+var _indexJsDefault6 = parcelHelpers.interopDefault(_indexJs6);
+var _indexJs7 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault7 = parcelHelpers.interopDefault(_indexJs7);
+var MINUTES_IN_DAY = 1440;
+var MINUTES_IN_ALMOST_TWO_DAYS = 2520;
+var MINUTES_IN_MONTH = 43200;
+var MINUTES_IN_TWO_MONTHS = 86400;
+function formatDistance(dirtyDate, dirtyBaseDate) {
+    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    (0, _indexJsDefault7.default)(2, arguments);
+    var locale = options.locale || (0, _indexJsDefault3.default);
+    if (!locale.formatDistance) throw new RangeError("locale must contain formatDistance property");
+    var comparison = (0, _indexJsDefault.default)(dirtyDate, dirtyBaseDate);
+    if (isNaN(comparison)) throw new RangeError("Invalid time value");
+    var localizeOptions = (0, _indexJsDefault5.default)(options);
+    localizeOptions.addSuffix = Boolean(options.addSuffix);
+    localizeOptions.comparison = comparison;
+    var dateLeft;
+    var dateRight;
+    if (comparison > 0) {
+        dateLeft = (0, _indexJsDefault4.default)(dirtyBaseDate);
+        dateRight = (0, _indexJsDefault4.default)(dirtyDate);
+    } else {
+        dateLeft = (0, _indexJsDefault4.default)(dirtyDate);
+        dateRight = (0, _indexJsDefault4.default)(dirtyBaseDate);
+    }
+    var seconds = (0, _indexJsDefault2.default)(dateRight, dateLeft);
+    var offsetInSeconds = ((0, _indexJsDefault6.default)(dateRight) - (0, _indexJsDefault6.default)(dateLeft)) / 1000;
+    var minutes = Math.round((seconds - offsetInSeconds) / 60);
+    var months; // 0 up to 2 mins
+    if (minutes < 2) {
+        if (options.includeSeconds) {
+            if (seconds < 5) return locale.formatDistance("lessThanXSeconds", 5, localizeOptions);
+            else if (seconds < 10) return locale.formatDistance("lessThanXSeconds", 10, localizeOptions);
+            else if (seconds < 20) return locale.formatDistance("lessThanXSeconds", 20, localizeOptions);
+            else if (seconds < 40) return locale.formatDistance("halfAMinute", null, localizeOptions);
+            else if (seconds < 60) return locale.formatDistance("lessThanXMinutes", 1, localizeOptions);
+            else return locale.formatDistance("xMinutes", 1, localizeOptions);
+        } else {
+            if (minutes === 0) return locale.formatDistance("lessThanXMinutes", 1, localizeOptions);
+            else return locale.formatDistance("xMinutes", minutes, localizeOptions);
+        } // 2 mins up to 0.75 hrs
+    } else if (minutes < 45) return locale.formatDistance("xMinutes", minutes, localizeOptions); // 0.75 hrs up to 1.5 hrs
+    else if (minutes < 90) return locale.formatDistance("aboutXHours", 1, localizeOptions); // 1.5 hrs up to 24 hrs
+    else if (minutes < MINUTES_IN_DAY) {
+        var hours = Math.round(minutes / 60);
+        return locale.formatDistance("aboutXHours", hours, localizeOptions); // 1 day up to 1.75 days
+    } else if (minutes < MINUTES_IN_ALMOST_TWO_DAYS) return locale.formatDistance("xDays", 1, localizeOptions); // 1.75 days up to 30 days
+    else if (minutes < MINUTES_IN_MONTH) {
+        var days = Math.round(minutes / MINUTES_IN_DAY);
+        return locale.formatDistance("xDays", days, localizeOptions); // 1 month up to 2 months
+    } else if (minutes < MINUTES_IN_TWO_MONTHS) {
+        months = Math.round(minutes / MINUTES_IN_MONTH);
+        return locale.formatDistance("aboutXMonths", months, localizeOptions);
+    }
+    months = (0, _indexJsDefault1.default)(dateRight, dateLeft); // 2 months up to 12 months
+    if (months < 12) {
+        var nearestMonth = Math.round(minutes / MINUTES_IN_MONTH);
+        return locale.formatDistance("xMonths", nearestMonth, localizeOptions); // 1 year up to max Date
+    } else {
+        var monthsSinceStartOfYear = months % 12;
+        var years = Math.floor(months / 12); // N years up to 1 years 3 months
+        if (monthsSinceStartOfYear < 3) return locale.formatDistance("aboutXYears", years, localizeOptions); // N years 3 months up to N years 9 months
+        else if (monthsSinceStartOfYear < 9) return locale.formatDistance("overXYears", years, localizeOptions); // N years 9 months up to N year 12 months
+        else return locale.formatDistance("almostXYears", years + 1, localizeOptions);
+    }
+}
+exports.default = formatDistance;
+
+},{"../compareAsc/index.js":"h01l4","../differenceInMonths/index.js":"8lj6Z","../differenceInSeconds/index.js":"5uZgU","../locale/en-US/index.js":"8XKCq","../toDate/index.js":"fsust","../_lib/cloneObject/index.js":"PgZBT","../_lib/getTimezoneOffsetInMilliseconds/index.js":"bc74C","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"h01l4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../toDate/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+function compareAsc(dirtyDateLeft, dirtyDateRight) {
+    (0, _indexJsDefault1.default)(2, arguments);
+    var dateLeft = (0, _indexJsDefault.default)(dirtyDateLeft);
+    var dateRight = (0, _indexJsDefault.default)(dirtyDateRight);
+    var diff = dateLeft.getTime() - dateRight.getTime();
+    if (diff < 0) return -1;
+    else if (diff > 0) return 1; // Return 0 if diff is 0; return NaN if diff is NaN
+    else return diff;
+}
+exports.default = compareAsc;
+
+},{"../toDate/index.js":"fsust","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fsust":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+function toDate(argument) {
+    (0, _indexJsDefault.default)(1, arguments);
+    var argStr = Object.prototype.toString.call(argument); // Clone the date
+    if (argument instanceof Date || typeof argument === "object" && argStr === "[object Date]") // Prevent the date to lose the milliseconds when passed to new Date() in IE10
+    return new Date(argument.getTime());
+    else if (typeof argument === "number" || argStr === "[object Number]") return new Date(argument);
+    else {
+        if ((typeof argument === "string" || argStr === "[object String]") && typeof console !== "undefined") {
+            // eslint-disable-next-line no-console
+            console.warn("Starting with v2.0.0-beta.1 date-fns doesn't accept strings as date arguments. Please use `parseISO` to parse strings. See: https://git.io/fjule"); // eslint-disable-next-line no-console
+            console.warn(new Error().stack);
+        }
+        return new Date(NaN);
+    }
+}
+exports.default = toDate;
+
+},{"../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9wUgQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function requiredArgs(required, args) {
+    if (args.length < required) throw new TypeError(required + " argument" + (required > 1 ? "s" : "") + " required, but only " + args.length + " present");
+}
+exports.default = requiredArgs;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8lj6Z":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../toDate/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../differenceInCalendarMonths/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../compareAsc/index.js");
+var _indexJsDefault2 = parcelHelpers.interopDefault(_indexJs2);
+var _indexJs3 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault3 = parcelHelpers.interopDefault(_indexJs3);
+var _indexJs4 = require("../isLastDayOfMonth/index.js");
+var _indexJsDefault4 = parcelHelpers.interopDefault(_indexJs4);
+function differenceInMonths(dirtyDateLeft, dirtyDateRight) {
+    (0, _indexJsDefault3.default)(2, arguments);
+    var dateLeft = (0, _indexJsDefault.default)(dirtyDateLeft);
+    var dateRight = (0, _indexJsDefault.default)(dirtyDateRight);
+    var sign = (0, _indexJsDefault2.default)(dateLeft, dateRight);
+    var difference = Math.abs((0, _indexJsDefault1.default)(dateLeft, dateRight));
+    var result; // Check for the difference of less than month
+    if (difference < 1) result = 0;
+    else {
+        if (dateLeft.getMonth() === 1 && dateLeft.getDate() > 27) // This will check if the date is end of Feb and assign a higher end of month date
+        // to compare it with Jan
+        dateLeft.setDate(30);
+        dateLeft.setMonth(dateLeft.getMonth() - sign * difference); // Math.abs(diff in full months - diff in calendar months) === 1 if last calendar month is not full
+        // If so, result must be decreased by 1 in absolute value
+        var isLastMonthNotFull = (0, _indexJsDefault2.default)(dateLeft, dateRight) === -sign; // Check for cases of one full calendar month
+        if ((0, _indexJsDefault4.default)((0, _indexJsDefault.default)(dirtyDateLeft)) && difference === 1 && (0, _indexJsDefault2.default)(dirtyDateLeft, dateRight) === 1) isLastMonthNotFull = false;
+        result = sign * (difference - Number(isLastMonthNotFull));
+    } // Prevent negative zero
+    return result === 0 ? 0 : result;
+}
+exports.default = differenceInMonths;
+
+},{"../toDate/index.js":"fsust","../differenceInCalendarMonths/index.js":"8oypH","../compareAsc/index.js":"h01l4","../_lib/requiredArgs/index.js":"9wUgQ","../isLastDayOfMonth/index.js":"1as6x","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8oypH":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../toDate/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+function differenceInCalendarMonths(dirtyDateLeft, dirtyDateRight) {
+    (0, _indexJsDefault1.default)(2, arguments);
+    var dateLeft = (0, _indexJsDefault.default)(dirtyDateLeft);
+    var dateRight = (0, _indexJsDefault.default)(dirtyDateRight);
+    var yearDiff = dateLeft.getFullYear() - dateRight.getFullYear();
+    var monthDiff = dateLeft.getMonth() - dateRight.getMonth();
+    return yearDiff * 12 + monthDiff;
+}
+exports.default = differenceInCalendarMonths;
+
+},{"../toDate/index.js":"fsust","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1as6x":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../toDate/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../endOfDay/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../endOfMonth/index.js");
+var _indexJsDefault2 = parcelHelpers.interopDefault(_indexJs2);
+var _indexJs3 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault3 = parcelHelpers.interopDefault(_indexJs3);
+function isLastDayOfMonth(dirtyDate) {
+    (0, _indexJsDefault3.default)(1, arguments);
+    var date = (0, _indexJsDefault.default)(dirtyDate);
+    return (0, _indexJsDefault1.default)(date).getTime() === (0, _indexJsDefault2.default)(date).getTime();
+}
+exports.default = isLastDayOfMonth;
+
+},{"../toDate/index.js":"fsust","../endOfDay/index.js":"kLkh7","../endOfMonth/index.js":"4tHlS","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kLkh7":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../toDate/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+function endOfDay(dirtyDate) {
+    (0, _indexJsDefault1.default)(1, arguments);
+    var date = (0, _indexJsDefault.default)(dirtyDate);
+    date.setHours(23, 59, 59, 999);
+    return date;
+}
+exports.default = endOfDay;
+
+},{"../toDate/index.js":"fsust","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4tHlS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../toDate/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+function endOfMonth(dirtyDate) {
+    (0, _indexJsDefault1.default)(1, arguments);
+    var date = (0, _indexJsDefault.default)(dirtyDate);
+    var month = date.getMonth();
+    date.setFullYear(date.getFullYear(), month + 1, 0);
+    date.setHours(23, 59, 59, 999);
+    return date;
+}
+exports.default = endOfMonth;
+
+},{"../toDate/index.js":"fsust","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5uZgU":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../differenceInMilliseconds/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../_lib/roundingMethods/index.js");
+function differenceInSeconds(dateLeft, dateRight, options) {
+    (0, _indexJsDefault1.default)(2, arguments);
+    var diff = (0, _indexJsDefault.default)(dateLeft, dateRight) / 1000;
+    return (0, _indexJs2.getRoundingMethod)(options === null || options === void 0 ? void 0 : options.roundingMethod)(diff);
+}
+exports.default = differenceInSeconds;
+
+},{"../differenceInMilliseconds/index.js":"Eb6qZ","../_lib/requiredArgs/index.js":"9wUgQ","../_lib/roundingMethods/index.js":"ilPgA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Eb6qZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../toDate/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+function differenceInMilliseconds(dateLeft, dateRight) {
+    (0, _indexJsDefault1.default)(2, arguments);
+    return (0, _indexJsDefault.default)(dateLeft).getTime() - (0, _indexJsDefault.default)(dateRight).getTime();
+}
+exports.default = differenceInMilliseconds;
+
+},{"../toDate/index.js":"fsust","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ilPgA":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getRoundingMethod", ()=>getRoundingMethod);
+var roundingMap = {
+    ceil: Math.ceil,
+    round: Math.round,
+    floor: Math.floor,
+    trunc: function(value) {
+        return value < 0 ? Math.ceil(value) : Math.floor(value);
+    } // Math.trunc is not supported by IE
+};
+var defaultRoundingMethod = "trunc";
+function getRoundingMethod(method) {
+    return method ? roundingMap[method] : roundingMap[defaultRoundingMethod];
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8XKCq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("./_lib/formatDistance/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("./_lib/formatLong/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("./_lib/formatRelative/index.js");
+var _indexJsDefault2 = parcelHelpers.interopDefault(_indexJs2);
+var _indexJs3 = require("./_lib/localize/index.js");
+var _indexJsDefault3 = parcelHelpers.interopDefault(_indexJs3);
+var _indexJs4 = require("./_lib/match/index.js");
+var _indexJsDefault4 = parcelHelpers.interopDefault(_indexJs4);
+/**
+ * @type {Locale}
+ * @category Locales
+ * @summary English locale (United States).
+ * @language English
+ * @iso-639-2 eng
+ * @author Sasha Koss [@kossnocorp]{@link https://github.com/kossnocorp}
+ * @author Lesha Koss [@leshakoss]{@link https://github.com/leshakoss}
+ */ var locale = {
+    code: "en-US",
+    formatDistance: (0, _indexJsDefault.default),
+    formatLong: (0, _indexJsDefault1.default),
+    formatRelative: (0, _indexJsDefault2.default),
+    localize: (0, _indexJsDefault3.default),
+    match: (0, _indexJsDefault4.default),
+    options: {
+        weekStartsOn: 0,
+        firstWeekContainsDate: 1
+    }
+};
+exports.default = locale;
+
+},{"./_lib/formatDistance/index.js":"lLrcE","./_lib/formatLong/index.js":"cA6Xb","./_lib/formatRelative/index.js":"9QlMp","./_lib/localize/index.js":"jv1Fa","./_lib/match/index.js":"1wA2o","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lLrcE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var formatDistanceLocale = {
+    lessThanXSeconds: {
+        one: "less than a second",
+        other: "less than {{count}} seconds"
+    },
+    xSeconds: {
+        one: "1 second",
+        other: "{{count}} seconds"
+    },
+    halfAMinute: "half a minute",
+    lessThanXMinutes: {
+        one: "less than a minute",
+        other: "less than {{count}} minutes"
+    },
+    xMinutes: {
+        one: "1 minute",
+        other: "{{count}} minutes"
+    },
+    aboutXHours: {
+        one: "about 1 hour",
+        other: "about {{count}} hours"
+    },
+    xHours: {
+        one: "1 hour",
+        other: "{{count}} hours"
+    },
+    xDays: {
+        one: "1 day",
+        other: "{{count}} days"
+    },
+    aboutXWeeks: {
+        one: "about 1 week",
+        other: "about {{count}} weeks"
+    },
+    xWeeks: {
+        one: "1 week",
+        other: "{{count}} weeks"
+    },
+    aboutXMonths: {
+        one: "about 1 month",
+        other: "about {{count}} months"
+    },
+    xMonths: {
+        one: "1 month",
+        other: "{{count}} months"
+    },
+    aboutXYears: {
+        one: "about 1 year",
+        other: "about {{count}} years"
+    },
+    xYears: {
+        one: "1 year",
+        other: "{{count}} years"
+    },
+    overXYears: {
+        one: "over 1 year",
+        other: "over {{count}} years"
+    },
+    almostXYears: {
+        one: "almost 1 year",
+        other: "almost {{count}} years"
+    }
+};
+var formatDistance = function(token, count, options) {
+    var result;
+    var tokenValue = formatDistanceLocale[token];
+    if (typeof tokenValue === "string") result = tokenValue;
+    else if (count === 1) result = tokenValue.one;
+    else result = tokenValue.other.replace("{{count}}", count.toString());
+    if (options !== null && options !== void 0 && options.addSuffix) {
+        if (options.comparison && options.comparison > 0) return "in " + result;
+        else return result + " ago";
+    }
+    return result;
+};
+exports.default = formatDistance;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cA6Xb":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../../../_lib/buildFormatLongFn/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var dateFormats = {
+    full: "EEEE, MMMM do, y",
+    long: "MMMM do, y",
+    medium: "MMM d, y",
+    short: "MM/dd/yyyy"
+};
+var timeFormats = {
+    full: "h:mm:ss a zzzz",
+    long: "h:mm:ss a z",
+    medium: "h:mm:ss a",
+    short: "h:mm a"
+};
+var dateTimeFormats = {
+    full: "{{date}} 'at' {{time}}",
+    long: "{{date}} 'at' {{time}}",
+    medium: "{{date}}, {{time}}",
+    short: "{{date}}, {{time}}"
+};
+var formatLong = {
+    date: (0, _indexJsDefault.default)({
+        formats: dateFormats,
+        defaultWidth: "full"
+    }),
+    time: (0, _indexJsDefault.default)({
+        formats: timeFormats,
+        defaultWidth: "full"
+    }),
+    dateTime: (0, _indexJsDefault.default)({
+        formats: dateTimeFormats,
+        defaultWidth: "full"
+    })
+};
+exports.default = formatLong;
+
+},{"../../../_lib/buildFormatLongFn/index.js":"h1FGd","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"h1FGd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function buildFormatLongFn(args) {
+    return function() {
+        var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        // TODO: Remove String()
+        var width = options.width ? String(options.width) : args.defaultWidth;
+        var format = args.formats[width] || args.formats[args.defaultWidth];
+        return format;
+    };
+}
+exports.default = buildFormatLongFn;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9QlMp":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var formatRelativeLocale = {
+    lastWeek: "'last' eeee 'at' p",
+    yesterday: "'yesterday at' p",
+    today: "'today at' p",
+    tomorrow: "'tomorrow at' p",
+    nextWeek: "eeee 'at' p",
+    other: "P"
+};
+var formatRelative = function(token, _date, _baseDate, _options) {
+    return formatRelativeLocale[token];
+};
+exports.default = formatRelative;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jv1Fa":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../../../_lib/buildLocalizeFn/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var eraValues = {
+    narrow: [
+        "B",
+        "A"
+    ],
+    abbreviated: [
+        "BC",
+        "AD"
+    ],
+    wide: [
+        "Before Christ",
+        "Anno Domini"
+    ]
+};
+var quarterValues = {
+    narrow: [
+        "1",
+        "2",
+        "3",
+        "4"
+    ],
+    abbreviated: [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4"
+    ],
+    wide: [
+        "1st quarter",
+        "2nd quarter",
+        "3rd quarter",
+        "4th quarter"
+    ]
+}; // Note: in English, the names of days of the week and months are capitalized.
+// If you are making a new locale based on this one, check if the same is true for the language you're working on.
+// Generally, formatted dates should look like they are in the middle of a sentence,
+// e.g. in Spanish language the weekdays and months should be in the lowercase.
+var monthValues = {
+    narrow: [
+        "J",
+        "F",
+        "M",
+        "A",
+        "M",
+        "J",
+        "J",
+        "A",
+        "S",
+        "O",
+        "N",
+        "D"
+    ],
+    abbreviated: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+    ],
+    wide: [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ]
+};
+var dayValues = {
+    narrow: [
+        "S",
+        "M",
+        "T",
+        "W",
+        "T",
+        "F",
+        "S"
+    ],
+    short: [
+        "Su",
+        "Mo",
+        "Tu",
+        "We",
+        "Th",
+        "Fr",
+        "Sa"
+    ],
+    abbreviated: [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+    ],
+    wide: [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+    ]
+};
+var dayPeriodValues = {
+    narrow: {
+        am: "a",
+        pm: "p",
+        midnight: "mi",
+        noon: "n",
+        morning: "morning",
+        afternoon: "afternoon",
+        evening: "evening",
+        night: "night"
+    },
+    abbreviated: {
+        am: "AM",
+        pm: "PM",
+        midnight: "midnight",
+        noon: "noon",
+        morning: "morning",
+        afternoon: "afternoon",
+        evening: "evening",
+        night: "night"
+    },
+    wide: {
+        am: "a.m.",
+        pm: "p.m.",
+        midnight: "midnight",
+        noon: "noon",
+        morning: "morning",
+        afternoon: "afternoon",
+        evening: "evening",
+        night: "night"
+    }
+};
+var formattingDayPeriodValues = {
+    narrow: {
+        am: "a",
+        pm: "p",
+        midnight: "mi",
+        noon: "n",
+        morning: "in the morning",
+        afternoon: "in the afternoon",
+        evening: "in the evening",
+        night: "at night"
+    },
+    abbreviated: {
+        am: "AM",
+        pm: "PM",
+        midnight: "midnight",
+        noon: "noon",
+        morning: "in the morning",
+        afternoon: "in the afternoon",
+        evening: "in the evening",
+        night: "at night"
+    },
+    wide: {
+        am: "a.m.",
+        pm: "p.m.",
+        midnight: "midnight",
+        noon: "noon",
+        morning: "in the morning",
+        afternoon: "in the afternoon",
+        evening: "in the evening",
+        night: "at night"
+    }
+};
+var ordinalNumber = function(dirtyNumber, _options) {
+    var number = Number(dirtyNumber); // If ordinal numbers depend on context, for example,
+    // if they are different for different grammatical genders,
+    // use `options.unit`.
+    //
+    // `unit` can be 'year', 'quarter', 'month', 'week', 'date', 'dayOfYear',
+    // 'day', 'hour', 'minute', 'second'.
+    var rem100 = number % 100;
+    if (rem100 > 20 || rem100 < 10) switch(rem100 % 10){
+        case 1:
+            return number + "st";
+        case 2:
+            return number + "nd";
+        case 3:
+            return number + "rd";
+    }
+    return number + "th";
+};
+var localize = {
+    ordinalNumber: ordinalNumber,
+    era: (0, _indexJsDefault.default)({
+        values: eraValues,
+        defaultWidth: "wide"
+    }),
+    quarter: (0, _indexJsDefault.default)({
+        values: quarterValues,
+        defaultWidth: "wide",
+        argumentCallback: function(quarter) {
+            return quarter - 1;
+        }
+    }),
+    month: (0, _indexJsDefault.default)({
+        values: monthValues,
+        defaultWidth: "wide"
+    }),
+    day: (0, _indexJsDefault.default)({
+        values: dayValues,
+        defaultWidth: "wide"
+    }),
+    dayPeriod: (0, _indexJsDefault.default)({
+        values: dayPeriodValues,
+        defaultWidth: "wide",
+        formattingValues: formattingDayPeriodValues,
+        defaultFormattingWidth: "wide"
+    })
+};
+exports.default = localize;
+
+},{"../../../_lib/buildLocalizeFn/index.js":"5l2rZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5l2rZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function buildLocalizeFn(args) {
+    return function(dirtyIndex, dirtyOptions) {
+        var options = dirtyOptions || {};
+        var context = options.context ? String(options.context) : "standalone";
+        var valuesArray;
+        if (context === "formatting" && args.formattingValues) {
+            var defaultWidth = args.defaultFormattingWidth || args.defaultWidth;
+            var width = options.width ? String(options.width) : defaultWidth;
+            valuesArray = args.formattingValues[width] || args.formattingValues[defaultWidth];
+        } else {
+            var _defaultWidth = args.defaultWidth;
+            var _width = options.width ? String(options.width) : args.defaultWidth;
+            valuesArray = args.values[_width] || args.values[_defaultWidth];
+        }
+        var index = args.argumentCallback ? args.argumentCallback(dirtyIndex) : dirtyIndex; // @ts-ignore: For some reason TypeScript just don't want to match it, no matter how hard we try. I challenge you to try to remove it!
+        return valuesArray[index];
+    };
+}
+exports.default = buildLocalizeFn;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1wA2o":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../../../_lib/buildMatchFn/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../../../_lib/buildMatchPatternFn/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+var matchOrdinalNumberPattern = /^(\d+)(th|st|nd|rd)?/i;
+var parseOrdinalNumberPattern = /\d+/i;
+var matchEraPatterns = {
+    narrow: /^(b|a)/i,
+    abbreviated: /^(b\.?\s?c\.?|b\.?\s?c\.?\s?e\.?|a\.?\s?d\.?|c\.?\s?e\.?)/i,
+    wide: /^(before christ|before common era|anno domini|common era)/i
+};
+var parseEraPatterns = {
+    any: [
+        /^b/i,
+        /^(a|c)/i
+    ]
+};
+var matchQuarterPatterns = {
+    narrow: /^[1234]/i,
+    abbreviated: /^q[1234]/i,
+    wide: /^[1234](th|st|nd|rd)? quarter/i
+};
+var parseQuarterPatterns = {
+    any: [
+        /1/i,
+        /2/i,
+        /3/i,
+        /4/i
+    ]
+};
+var matchMonthPatterns = {
+    narrow: /^[jfmasond]/i,
+    abbreviated: /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i,
+    wide: /^(january|february|march|april|may|june|july|august|september|october|november|december)/i
+};
+var parseMonthPatterns = {
+    narrow: [
+        /^j/i,
+        /^f/i,
+        /^m/i,
+        /^a/i,
+        /^m/i,
+        /^j/i,
+        /^j/i,
+        /^a/i,
+        /^s/i,
+        /^o/i,
+        /^n/i,
+        /^d/i
+    ],
+    any: [
+        /^ja/i,
+        /^f/i,
+        /^mar/i,
+        /^ap/i,
+        /^may/i,
+        /^jun/i,
+        /^jul/i,
+        /^au/i,
+        /^s/i,
+        /^o/i,
+        /^n/i,
+        /^d/i
+    ]
+};
+var matchDayPatterns = {
+    narrow: /^[smtwf]/i,
+    short: /^(su|mo|tu|we|th|fr|sa)/i,
+    abbreviated: /^(sun|mon|tue|wed|thu|fri|sat)/i,
+    wide: /^(sunday|monday|tuesday|wednesday|thursday|friday|saturday)/i
+};
+var parseDayPatterns = {
+    narrow: [
+        /^s/i,
+        /^m/i,
+        /^t/i,
+        /^w/i,
+        /^t/i,
+        /^f/i,
+        /^s/i
+    ],
+    any: [
+        /^su/i,
+        /^m/i,
+        /^tu/i,
+        /^w/i,
+        /^th/i,
+        /^f/i,
+        /^sa/i
+    ]
+};
+var matchDayPeriodPatterns = {
+    narrow: /^(a|p|mi|n|(in the|at) (morning|afternoon|evening|night))/i,
+    any: /^([ap]\.?\s?m\.?|midnight|noon|(in the|at) (morning|afternoon|evening|night))/i
+};
+var parseDayPeriodPatterns = {
+    any: {
+        am: /^a/i,
+        pm: /^p/i,
+        midnight: /^mi/i,
+        noon: /^no/i,
+        morning: /morning/i,
+        afternoon: /afternoon/i,
+        evening: /evening/i,
+        night: /night/i
+    }
+};
+var match = {
+    ordinalNumber: (0, _indexJsDefault1.default)({
+        matchPattern: matchOrdinalNumberPattern,
+        parsePattern: parseOrdinalNumberPattern,
+        valueCallback: function(value) {
+            return parseInt(value, 10);
+        }
+    }),
+    era: (0, _indexJsDefault.default)({
+        matchPatterns: matchEraPatterns,
+        defaultMatchWidth: "wide",
+        parsePatterns: parseEraPatterns,
+        defaultParseWidth: "any"
+    }),
+    quarter: (0, _indexJsDefault.default)({
+        matchPatterns: matchQuarterPatterns,
+        defaultMatchWidth: "wide",
+        parsePatterns: parseQuarterPatterns,
+        defaultParseWidth: "any",
+        valueCallback: function(index) {
+            return index + 1;
+        }
+    }),
+    month: (0, _indexJsDefault.default)({
+        matchPatterns: matchMonthPatterns,
+        defaultMatchWidth: "wide",
+        parsePatterns: parseMonthPatterns,
+        defaultParseWidth: "any"
+    }),
+    day: (0, _indexJsDefault.default)({
+        matchPatterns: matchDayPatterns,
+        defaultMatchWidth: "wide",
+        parsePatterns: parseDayPatterns,
+        defaultParseWidth: "any"
+    }),
+    dayPeriod: (0, _indexJsDefault.default)({
+        matchPatterns: matchDayPeriodPatterns,
+        defaultMatchWidth: "any",
+        parsePatterns: parseDayPeriodPatterns,
+        defaultParseWidth: "any"
+    })
+};
+exports.default = match;
+
+},{"../../../_lib/buildMatchFn/index.js":"2nEf9","../../../_lib/buildMatchPatternFn/index.js":"4GjCS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2nEf9":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function buildMatchFn(args) {
+    return function(string) {
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        var width = options.width;
+        var matchPattern = width && args.matchPatterns[width] || args.matchPatterns[args.defaultMatchWidth];
+        var matchResult = string.match(matchPattern);
+        if (!matchResult) return null;
+        var matchedString = matchResult[0];
+        var parsePatterns = width && args.parsePatterns[width] || args.parsePatterns[args.defaultParseWidth];
+        var key = Array.isArray(parsePatterns) ? findIndex(parsePatterns, function(pattern) {
+            return pattern.test(matchedString);
+        }) : findKey(parsePatterns, function(pattern) {
+            return pattern.test(matchedString);
+        });
+        var value;
+        value = args.valueCallback ? args.valueCallback(key) : key;
+        value = options.valueCallback ? options.valueCallback(value) : value;
+        var rest = string.slice(matchedString.length);
+        return {
+            value: value,
+            rest: rest
+        };
+    };
+}
+exports.default = buildMatchFn;
+function findKey(object, predicate) {
+    for(var key in object){
+        if (object.hasOwnProperty(key) && predicate(object[key])) return key;
+    }
+    return undefined;
+}
+function findIndex(array, predicate) {
+    for(var key = 0; key < array.length; key++){
+        if (predicate(array[key])) return key;
+    }
+    return undefined;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4GjCS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function buildMatchPatternFn(args) {
+    return function(string) {
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        var matchResult = string.match(args.matchPattern);
+        if (!matchResult) return null;
+        var matchedString = matchResult[0];
+        var parseResult = string.match(args.parsePattern);
+        if (!parseResult) return null;
+        var value = args.valueCallback ? args.valueCallback(parseResult[0]) : parseResult[0];
+        value = options.valueCallback ? options.valueCallback(value) : value;
+        var rest = string.slice(matchedString.length);
+        return {
+            value: value,
+            rest: rest
+        };
+    };
+}
+exports.default = buildMatchPatternFn;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"PgZBT":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../assign/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+function cloneObject(dirtyObject) {
+    return (0, _indexJsDefault.default)({}, dirtyObject);
+}
+exports.default = cloneObject;
+
+},{"../assign/index.js":"hBuJM","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hBuJM":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function assign(target, dirtyObject) {
+    if (target == null) throw new TypeError("assign requires that input parameter not be null or undefined");
+    dirtyObject = dirtyObject || {};
+    for(var property in dirtyObject)if (Object.prototype.hasOwnProperty.call(dirtyObject, property)) target[property] = dirtyObject[property];
+    return target;
+}
+exports.default = assign;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bc74C":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function getTimezoneOffsetInMilliseconds(date) {
+    var utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
+    utcDate.setUTCFullYear(date.getFullYear());
+    return date.getTime() - utcDate.getTime();
+}
+exports.default = getTimezoneOffsetInMilliseconds;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gKKXK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "blink", ()=>blink);
+function blink() {
+    const allTweens = gsap.globalTimeline.getChildren();
+    if (allTweens.every((tween)=>!tween.isActive())) {
+        const tl = gsap.timeline({
+            defaults: {
+                duration: 0.1
+            }
+        });
+        tl.set(".stickman-9-blink", {
+            autoAlpha: 1,
+            delay: 0.5
+        }).to(".stickman-9-blink", {
+            autoAlpha: 0,
+            delay: 0.15,
+            onComplete: ()=>{
+                const num = gsap.utils.random(2, 6, 0.1);
+                // console.log(num)
+                gsap.delayedCall(num, blink);
+            }
+        });
+    } else {
+        setTimeout(()=>{
+            blink();
+        }, 3000);
+        return;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iEcuG":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "bounce", ()=>bounce);
+var _master = require("./master");
+function bounce() {
+    if ((0, _master.master).progress() > 0) return;
+    const allTweens = gsap.globalTimeline.getChildren();
+    if (allTweens.every((tween)=>!tween.isActive())) {
+        const tl = gsap.timeline({
+            repeat: 1,
+            onComplete: ()=>{
+                gsap.delayedCall(10, bounce);
+            }
+        });
+        tl.to(".bag-1", {
+            duration: 0.25,
+            ease: "back.out(4)",
+            scaleX: 1.2,
+            scaleY: 0.9
+        }, 0).to(".bag-1", {
+            duration: 0.25,
+            ease: "back.out(4)",
+            scaleX: 1,
+            scaleY: 1
+        }, 0.25).set(".bag-shadow-1", {
+            autoAlpha: 0
+        }, 0).set(".bag-shadow-d-1", {
+            autoAlpha: 1
+        }, ">").set(".bag-shadow-d-1", {
+            autoAlpha: 0
+        }, 0.15).set(".bag-shadow-d-2", {
+            autoAlpha: 1
+        }, ">").set(".bag-shadow-d-2", {
+            autoAlpha: 0
+        }, 0.24).set(".bag-shadow-d-1", {
+            autoAlpha: 1
+        }, ">").set(".bag-shadow-d-1", {
+            autoAlpha: 0
+        }, 0.33).set(".bag-shadow-1", {
+            autoAlpha: 1
+        }, ">");
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./master":"kB96Y"}],"d3YGf":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "shadowMorph", ()=>shadowMorph);
+function shadowMorph() {
+    const tl = gsap.timeline({
+        defaults: {
+            duration: 0,
+            immediateRender: false
+        }
+    });
+    tl.to(".shadow-9", {
+        autoAlpha: 0
+    }).to(".shadow-morph-1", {
+        autoAlpha: 1
+    }).to(".shadow-morph-1", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".shadow-morph-2", {
+        autoAlpha: 1
+    }).to(".shadow-morph-2", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".shadow-morph-3", {
+        autoAlpha: 1
+    }).to(".shadow-morph-3", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".shadow-morph-4", {
+        autoAlpha: 1
+    });
+    return tl;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dfaA0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "bagDistorts", ()=>bagDistorts);
+parcelHelpers.export(exports, "bagOpens", ()=>bagOpens);
+function bagDistorts() {
+    const tl = gsap.timeline();
+    gsap.set(".bag-1", {
+        transformOrigin: "bottom"
+    });
+    tl.to(".bag-1", {
+        duration: 0.25,
+        ease: "back.out(4)",
+        scaleX: 1.2,
+        scaleY: 0.9
+    }).to(".bag-1", {
+        duration: 0.25,
+        ease: "back.out(4)",
+        scaleX: 1,
+        scaleY: 1
+    }).set(".bag-shadow-1", {
+        autoAlpha: 0
+    }, 0).set(".bag-shadow-d-1", {
+        autoAlpha: 1
+    }, ">").set(".bag-shadow-d-1", {
+        autoAlpha: 0
+    }, 0.15).set(".bag-shadow-d-2", {
+        autoAlpha: 1
+    }, ">").set(".bag-shadow-d-2", {
+        autoAlpha: 0
+    }, 0.24).set(".bag-shadow-d-1", {
+        autoAlpha: 1
+    }, ">").set(".bag-shadow-d-1", {
+        autoAlpha: 0
+    }, 0.33).set(".bag-shadow-1", {
+        autoAlpha: 1
+    }, ">");
+    return tl;
+}
+function bagOpens() {
+    const tl = gsap.timeline({
+        defaults: {
+            duration: 0
+        }
+    });
+    tl.to(".bag-1", {
+        duration: 0.05,
+        x: "-2%"
+    }).to(".bag-1", {
+        duration: 0.05,
+        x: "4%"
+    }).to(".bag-1", {
+        duration: 0.05,
+        x: "-4%"
+    }).to(".bag-1", {
+        duration: 0.05,
+        x: "4%"
+    }).to(".bag-1", {
+        duration: 0.05,
+        x: "-4%"
+    }).to(".bag-1", {
+        duration: 0.05,
+        x: "4%"
+    }).to(".bag-1", {
+        duration: 0.05,
+        x: "-4%"
+    }).to(".bag-1", {
+        duration: 0.05,
+        x: "2%"
+    }).to(".bag-1, .bag-shadow-1", {
+        autoAlpha: 0
+    }).to(".bag-2, .bag-shadow-2", {
+        autoAlpha: 1
+    }).to(".bag-2, .bag-shadow-2", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".bag-3, .bag-shadow-3", {
+        autoAlpha: 1
+    }).to(".bag-3, .bag-shadow-3", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".bag-4, .bag-shadow-4", {
+        autoAlpha: 1
+    });
+    // duration 0.6
+    return tl;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l7kp3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "overlay", ()=>overlay);
+function overlay() {
+    const tl = gsap.timeline({
+        defaults: {
+            duration: 1
+        }
+    });
+    tl.to(".img-overlay", {
+        duration: 1,
+        opacity: 1
+    }).to(".hill-1, .hill-2, .hill-3, .mountain ", {
+        opacity: 0
+    }, 0).to(".title", {
+        webkitTextFillColor: "#303030"
+    }, 0).to(".greeting p", {
+        color: "#303030"
+    }, 0);
+    return tl;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eWK60":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "toRest", ()=>toRest);
+function toRest() {
+    const tl = gsap.timeline({
+        defaults: {
+            duration: 0
+        }
+    });
+    tl.to(".stickman-9", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".stickman-r-1", {
+        autoAlpha: 1
+    }).to(".stickman-r-1", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".stickman-r-2", {
+        autoAlpha: 1
+    }).to(".stickman-r-2", {
+        autoAlpha: 0,
+        delay: 0.1
+    }).to(".stickman-1", {
+        autoAlpha: 1
+    });
+    return tl;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ln8Et","hEjg9"], "hEjg9", "parcelRequire3f98")
 
 //# sourceMappingURL=index.77799722.js.map

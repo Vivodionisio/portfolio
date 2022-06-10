@@ -1,11 +1,11 @@
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger)
-import { shake } from './stickman'
+import { bounce } from '../stickman/master'
 
 gsap.set('.stickman-scene', { autoAlpha: 0 })
 gsap.set('.phantum-element, .bag-1', { pointerEvents: 'none' })
 
 function scene() {
-  const tl = gsap.timeline({ defaults: { duration: 1 }, onComplete: shake })
+  const tl = gsap.timeline({ defaults: { duration: 1 }, onComplete: bounce })
   tl.from(
     '.hill-1',
     {
