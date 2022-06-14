@@ -1,5 +1,4 @@
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
-// import { formatDistanceToNow } from 'date-fns'
 gsap.registerPlugin(TextPlugin)
 
 // Populating text elements for each tool (see FAN OUT)

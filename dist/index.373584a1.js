@@ -523,7 +523,8 @@ master.add((0, _tada.taDa)()) // 0.9
 .add((0, _bag.bagOpens)(), "-=0.4") // 0.6 //'-=0.4'
 .add((0, _shadowMorph.shadowMorph)(), "-=0.2") //0.301
 .add((0, _tada.lookLeft)()) // 1.7
-.add((0, _overlay.overlay)(), "-=1.9").add((0, _fanout.fanOut)(), "-=2.9").add((0, _toRest.toRest)());
+.add((0, _overlay.overlay)(), "-=1.9").add((0, _fanout.fanOut)(), "-=2.9") // '-=2.9'
+.add((0, _toRest.toRest)());
 (0, _blink.blink)();
 setTimeout(()=>{
     (0, _bounce.bounce)();
@@ -631,6 +632,8 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "fanOut", ()=>fanOut);
 var _textAnim = require("./text_anim");
 function fanOut() {
+    const string = document.querySelectorAll(".html5, .css3, .sass, .javascript, .api, .npm, .github, .svg, .greensock, .react");
+    console.log(string);
     gsap.set(".html5, .css3, .sass, .javascript, .api, .npm, .github, .svg, .greensock, .react", {
         xPercent: -50,
         yPercent: -50,
@@ -796,7 +799,6 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "makeIconButtons", ()=>makeIconButtons);
 var _formatDistanceToNow = require("date-fns/formatDistanceToNow");
 var _formatDistanceToNowDefault = parcelHelpers.interopDefault(_formatDistanceToNow);
-// import { formatDistanceToNow } from 'date-fns'
 gsap.registerPlugin(TextPlugin);
 // Populating text elements for each tool (see FAN OUT)
 const svgTextEles = gsap.utils.toArray(".icon-text");

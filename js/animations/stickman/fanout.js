@@ -1,6 +1,10 @@
 import { makeIconButtons } from './text_anim'
 
 export function fanOut() {
+  const string = document.querySelectorAll(
+    '.html5, .css3, .sass, .javascript, .api, .npm, .github, .svg, .greensock, .react'
+  )
+  console.log(string)
   gsap.set(
     '.html5, .css3, .sass, .javascript, .api, .npm, .github, .svg, .greensock, .react',
     {

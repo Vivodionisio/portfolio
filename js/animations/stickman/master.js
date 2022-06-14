@@ -16,7 +16,7 @@ master
   .add(shadowMorph(), '-=0.2') //0.301
   .add(lookLeft()) // 1.7
   .add(overlay(), '-=1.9')
-  .add(fanOut(), '-=2.9')
+  .add(fanOut(), '-=2.9') // '-=2.9'
   .add(toRest())
 
 blink()
