@@ -2,3 +2,7 @@ node_modules
 stickman_scene.svg
 .vscode
 .parcel-cache
+
+# assets
+stickman-bw.svg
+stickman-complex-color.svg
