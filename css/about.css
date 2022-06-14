@@ -1,9 +1,10 @@
 section.about {
   width: calc(100% - 160px);
   margin: auto;
-  height: 100vh;
-  min-height: 1290px;
-  min-height: 1384px;
+  /* height: 100vh; */
+  height: max-content;
+  /* min-height: 1290px;
+  min-height: 1384px; */
   text-align: center;
 }
 
@@ -27,6 +28,7 @@ section.about p:nth-child(4) {
 section.about .resume {
   margin: auto;
   margin-top: 100px;
+  margin-bottom: 150px;
 }
 
 section.about .resume a {
@@ -60,7 +62,7 @@ section.about .resume a:hover {
 
 @media screen and (max-width: 935px) {
   .page .container section.about {
-    min-height: 1620px;
+    /* min-height: 1620px; */
   }
 }
 

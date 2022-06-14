@@ -790,7 +790,7 @@ function fanOut() {
     return tl;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./text_anim":"ftWIl"}],"ftWIl":[function(require,module,exports) {
+},{"./text_anim":"ftWIl","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ftWIl":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "makeIconButtons", ()=>makeIconButtons);
@@ -818,11 +818,14 @@ function makeIconButtons() {
     icons.forEach((icon, idx)=>{
         const textEle = svgTextEles[idx];
         const dateBegan = textEle.getAttribute("data-time-elapsed");
+        console.log(dateBegan);
         // get time elapsed
         const prevTime = new Date(dateBegan);
         const thisTime = new Date();
         const diffMs = thisTime.getTime() - prevTime.getTime();
-        const diffInWords = `${(0, _formatDistanceToNowDefault.default)(prevTime)} exp.` // date-fns
+        console.log(thisTime.getTime());
+        console.log(diffMs);
+        const diffInWords = `${(0, _formatDistanceToNowDefault.default)(new Date(dateBegan))} exp.` // date-fns
         ;
         icon.anim = type(textEle, diffMs, diffInWords);
         icon.addEventListener("mouseenter", ()=>{
@@ -1895,7 +1898,7 @@ function bounce() {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./master":"kB96Y"}],"d3YGf":[function(require,module,exports) {
+},{"./master":"kB96Y","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"d3YGf":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "shadowMorph", ()=>shadowMorph);

@@ -1,8 +1,6 @@
 section.about {
   width: calc(100% - 160px);
-  height: 100vh;
-  min-height: 1290px;
-  min-height: 1384px;
+  height: max-content;
   text-align: center;
   margin: auto;
 }
@@ -23,7 +21,7 @@ section.about p:nth-child(3), section.about p:nth-child(4) {
 }
 
 section.about .resume {
-  margin: 100px auto auto;
+  margin: 100px auto 150px;
 }
 
 section.about .resume a {
@@ -52,12 +50,6 @@ section.about .resume a:hover {
 @media screen and (max-width: 1080px) {
   section.about p {
     min-width: 238px;
-  }
-}
-
-@media screen and (max-width: 935px) {
-  .page .container section.about {
-    min-height: 1620px;
   }
 }
 
