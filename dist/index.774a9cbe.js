@@ -503,7 +503,7 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"6yAQ6":[function(require,module,exports) {
-var _master = require("../stickman/master");
+var _bounce = require("../stickman/bounce");
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 gsap.set(".stickman-scene", {
     autoAlpha: 0
@@ -516,7 +516,7 @@ function scene() {
         defaults: {
             duration: 1
         },
-        onComplete: (0, _master.bounce)
+        onComplete: (0, _bounce.bounce)
     });
     tl.from(".hill-1", {
         autoAlpha: 0,
@@ -597,6 +597,6 @@ ScrollTrigger.matchMedia({
     }
 });
 
-},{"../stickman/master":"kB96Y"}]},["e60Gz","6yAQ6"], "6yAQ6", "parcelRequire3f98")
+},{"../stickman/bounce":"iEcuG"}]},["e60Gz","6yAQ6"], "6yAQ6", "parcelRequire3f98")
 
 //# sourceMappingURL=index.774a9cbe.js.map

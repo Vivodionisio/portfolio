@@ -1,5 +1,5 @@
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger)
-import { bounce } from '../stickman/master'
+import { bounce } from '../stickman/bounce'
 
 gsap.set('.stickman-scene', { autoAlpha: 0 })
 gsap.set('.phantum-element, .bag-1', { pointerEvents: 'none' })
