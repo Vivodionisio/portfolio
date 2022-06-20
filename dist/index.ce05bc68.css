@@ -219,4 +219,52 @@ g#columns, #columns1, #columns2, #columns3 {
   }
 }
 
+@media screen and (max-width: 452px) {
+  .topbar .nav {
+    padding: 0 4px;
+  }
+
+  .greeting {
+    top: 200px;
+  }
+
+  .greeting h1 {
+    font-size: 3.8rem;
+  }
+
+  .greeting p {
+    width: 340px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .greeting {
+    top: 200px;
+    left: 20px;
+  }
+
+  .greeting p {
+    width: 316px;
+  }
+
+  .greeting h1 {
+    font-size: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .greeting h1 {
+    font-size: 3rem;
+  }
+
+  .topbar .nav a {
+    font-size: .8rem;
+  }
+
+  .page .scene svg {
+    width: 850px;
+    right: -273px;
+  }
+}
+
 /*# sourceMappingURL=index.ce05bc68.css.map */

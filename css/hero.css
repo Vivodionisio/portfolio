@@ -224,10 +224,53 @@ g#columns,
   .greeting {
     left: 40px;
   }
-  .greeting {
-    /* transform: scale(0.8); */
-  }
   .greeting p {
     width: 445px;
+  }
+}
+
+@media screen and (max-width: 452px) {
+  .topbar .nav {
+    padding: 0 4px;
+  }
+  .greeting {
+    top: 200px;
+  }
+  .greeting h1 {
+    font-size: 3.8rem;
+  }
+  .greeting p {
+    width: 340px;
+  }
+  /* .page .scene svg {
+    right: -250px;
+  } */
+}
+
+@media screen and (max-width: 360px) {
+  .greeting {
+    top: 200px;
+    left: 20px;
+  }
+  .greeting p {
+    width: 316px;
+  }
+  .greeting h1 {
+    font-size: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .greeting h1 {
+    font-size: 3rem;
+  }
+
+  .topbar .nav a {
+    font-size: 0.8rem;
+  }
+
+  .page .scene svg {
+    right: -273px;
+    width: 850px;
   }
 }

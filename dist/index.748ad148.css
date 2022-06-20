@@ -109,4 +109,12 @@ a:hover {
   }
 }
 
+@media screen and (max-width: 400px) {
+  section.about h2, section.projects h2, section.contact h2 {
+    padding-top: 90px;
+    padding-bottom: 90px;
+    font-size: 2.5rem;
+  }
+}
+
 /*# sourceMappingURL=index.748ad148.css.map */

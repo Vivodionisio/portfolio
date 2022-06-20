@@ -21,8 +21,6 @@ export function makeIconButtons() {
     const prevTime = new Date(dateBegan)
     const thisTime = new Date()
     const diffMs = thisTime.getTime() - prevTime.getTime()
-    console.log(thisTime.getTime())
-    console.log(diffMs)
     const diffInWords = `${formatDistanceToNow(new Date(dateBegan))} exp.` // date-fns
 
     icon.anim = type(textEle, diffMs, diffInWords)

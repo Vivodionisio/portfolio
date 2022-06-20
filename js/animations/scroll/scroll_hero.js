@@ -1,11 +1,16 @@
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger)
 import { bounce } from '../stickman/bounce'
+import { master } from '../stickman/master'
 
 gsap.set('.stickman-scene', { autoAlpha: 0 })
 gsap.set('.phantum-element, .bag-1', { pointerEvents: 'none' })
 
-function scene() {
-  const tl = gsap.timeline({ defaults: { duration: 1 }, onComplete: bounce })
+const scene = () => {
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { duration: 1 },
+    onComplete: bounce // bag movement at set intervals to attract user attention
+  })
   tl.from(
     '.hill-1',
     {
@@ -58,8 +63,8 @@ function scene() {
   return tl
 }
 
-function greeting() {
-  const tl = gsap.timeline()
+const greeting = () => {
+  const tl = gsap.timeline({ paused: true })
   gsap.set('.greeting h1, .greeting p', { autoAlpha: 1 })
   tl.from('.greeting h1, .greeting p', {
     autoAlpha: 0,
@@ -71,31 +76,39 @@ function greeting() {
   return tl
 }
 
-ScrollTrigger.matchMedia({
-  // Mobile
-  '(max-width: 935px)': () => {
-    if (gsap.getProperty('.img-overlay', 'opacity') === 1) return
-    if (gsap.getProperty('.stickman-scene', 'opacity') === 1) return
-    gsap.set('.stickman-scene', { autoAlpha: 0 })
-    gsap.to('.stickman-scene', {
-      scrollTrigger: {
-        trigger: '.stickman-scene',
-        start: 'top 30%',
-        onEnter: () => {
-          if (gsap.getProperty('.stickman-scene', 'opacity') === 1) return
-          scene().play()
-        }
-      },
-      autoAlpha: 1,
-      duration: 0.5
-    })
-    greeting().play()
-  },
-  // Desktop
-  '(min-width: 935px)': () => {
-    if (gsap.getProperty('.stickman-scene', 'opacity') === 1) return
-    gsap.set('.stickman-scene', { autoAlpha: 1 })
-    scene().play()
-    greeting().play().delay(0.5)
-  }
+const sceneTl = scene()
+const greetingTl = greeting()
+
+window.addEventListener('load', () => {
+  ScrollTrigger.matchMedia({
+    // Mobile
+    '(max-width: 934px)': () => {
+      if (master.progress() > 0) return
+      if (sceneTl.progress() > 0) return
+
+      if (greetingTl.progress() === 0) greetingTl.play()
+
+      gsap.set('.stickman-scene', { autoAlpha: 0 })
+
+      gsap.to('.stickman-scene', {
+        scrollTrigger: {
+          trigger: '.stickman-scene',
+          start: 'top 30%',
+          onEnter: () => {
+            if (sceneTl.progress() === 0 && document.readyState === 'complete')
+              console.log(document.readyState)
+            sceneTl.play()
+          }
+        },
+        autoAlpha: 1,
+        duration: 0.5
+      })
+    },
+    // Desktop
+    '(min-width: 935px)': () => {
+      gsap.set('.stickman-scene', { autoAlpha: 1 })
+      if (sceneTl.progress() === 0) sceneTl.play()
+      if (greetingTl.progress() === 0) greetingTl.play().delay(0.5)
+    }
+  })
 })

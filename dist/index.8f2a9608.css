@@ -243,4 +243,11 @@
   }
 }
 
+@media screen and (max-width: 360px) {
+  .page .container .projects .exibit {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
 /*# sourceMappingURL=index.8f2a9608.css.map */

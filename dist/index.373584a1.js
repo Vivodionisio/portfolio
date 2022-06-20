@@ -509,7 +509,6 @@ parcelHelpers.export(exports, "master", ()=>master);
 var _tada = require("./tada");
 var _fanout = require("./fanout");
 var _blink = require("./blink");
-var _bounce = require("./bounce");
 var _shadowMorph = require("./shadow_morph");
 var _bag = require("./bag");
 var _overlay = require("./overlay");
@@ -518,17 +517,16 @@ const master = gsap.timeline({
     paused: true,
     onComplete: (0, _blink.blink)
 });
-master.add((0, _tada.taDa)()) // 0.9
-.add((0, _bag.bagDistorts)()) // 0.5
-.add((0, _bag.bagOpens)(), "-=0.4") // 0.6 //'-=0.4'
-.add((0, _shadowMorph.shadowMorph)(), "-=0.2") //0.301
-.add((0, _tada.lookLeft)()) // 1.7
-.add((0, _overlay.overlay)(), "-=1.9").add((0, _fanout.fanOut)(), "-=2.9") // '-=2.9'
-.add((0, _toRest.toRest)());
+window.addEventListener("load", ()=>{
+    master.add((0, _tada.taDa)()) // 0.9
+    .add((0, _bag.bagDistorts)()) // 0.5
+    .add((0, _bag.bagOpens)(), "-=0.4") // 0.6 //'-=0.4'
+    .add((0, _shadowMorph.shadowMorph)(), "-=0.2") //0.301
+    .add((0, _tada.lookLeft)()) // 1.7
+    .add((0, _overlay.overlay)(), "-=1.9").add((0, _fanout.fanOut)(), "-=2.9") // '-=2.9'
+    .add((0, _toRest.toRest)());
+});
 (0, _blink.blink)();
-setTimeout(()=>{
-    (0, _bounce.bounce)();
-}, 3000);
 // Event Listener
 const phantumElement = document.querySelector(".phantum-element");
 const bagElement = document.querySelector(".bag-1");
@@ -542,7 +540,7 @@ eleArray.forEach((ele)=>{
     });
 });
 
-},{"./tada":"bU9V8","./fanout":"7gO4I","./blink":"gKKXK","./bounce":"iEcuG","./shadow_morph":"d3YGf","./bag":"dfaA0","./overlay":"l7kp3","./to_rest":"eWK60","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bU9V8":[function(require,module,exports) {
+},{"./tada":"bU9V8","./fanout":"7gO4I","./blink":"gKKXK","./shadow_morph":"d3YGf","./bag":"dfaA0","./overlay":"l7kp3","./to_rest":"eWK60","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bU9V8":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "taDa", ()=>taDa);
@@ -632,8 +630,6 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "fanOut", ()=>fanOut);
 var _textAnim = require("./text_anim");
 function fanOut() {
-    const string = document.querySelectorAll(".html5, .css3, .sass, .javascript, .api, .npm, .github, .svg, .greensock, .react");
-    console.log(string);
     gsap.set(".html5, .css3, .sass, .javascript, .api, .npm, .github, .svg, .greensock, .react", {
         xPercent: -50,
         yPercent: -50,
@@ -825,8 +821,6 @@ function makeIconButtons() {
         const prevTime = new Date(dateBegan);
         const thisTime = new Date();
         const diffMs = thisTime.getTime() - prevTime.getTime();
-        console.log(thisTime.getTime());
-        console.log(diffMs);
         const diffInWords = `${(0, _formatDistanceToNowDefault.default)(new Date(dateBegan))} exp.` // date-fns
         ;
         icon.anim = type(textEle, diffMs, diffInWords);
@@ -1855,52 +1849,7 @@ function blink() {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iEcuG":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "bounce", ()=>bounce);
-var _master = require("./master");
-function bounce() {
-    if ((0, _master.master).progress() > 0) return;
-    const allTweens = gsap.globalTimeline.getChildren();
-    if (allTweens.every((tween)=>!tween.isActive())) {
-        const tl = gsap.timeline({
-            repeat: 1,
-            onComplete: ()=>{
-                gsap.delayedCall(10, bounce);
-            }
-        });
-        tl.to(".bag-1", {
-            duration: 0.25,
-            ease: "back.out(4)",
-            scaleX: 1.2,
-            scaleY: 0.9
-        }, 0).to(".bag-1", {
-            duration: 0.25,
-            ease: "back.out(4)",
-            scaleX: 1,
-            scaleY: 1
-        }, 0.25).set(".bag-shadow-1", {
-            autoAlpha: 0
-        }, 0).set(".bag-shadow-d-1", {
-            autoAlpha: 1
-        }, ">").set(".bag-shadow-d-1", {
-            autoAlpha: 0
-        }, 0.15).set(".bag-shadow-d-2", {
-            autoAlpha: 1
-        }, ">").set(".bag-shadow-d-2", {
-            autoAlpha: 0
-        }, 0.24).set(".bag-shadow-d-1", {
-            autoAlpha: 1
-        }, ">").set(".bag-shadow-d-1", {
-            autoAlpha: 0
-        }, 0.33).set(".bag-shadow-1", {
-            autoAlpha: 1
-        }, ">");
-    }
-}
-
-},{"./master":"kB96Y","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"d3YGf":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"d3YGf":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "shadowMorph", ()=>shadowMorph);

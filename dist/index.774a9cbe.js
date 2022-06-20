@@ -504,6 +504,7 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"6yAQ6":[function(require,module,exports) {
 var _bounce = require("../stickman/bounce");
+var _master = require("../stickman/master");
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 gsap.set(".stickman-scene", {
     autoAlpha: 0
@@ -511,12 +512,14 @@ gsap.set(".stickman-scene", {
 gsap.set(".phantum-element, .bag-1", {
     pointerEvents: "none"
 });
-function scene() {
+const scene = ()=>{
     const tl = gsap.timeline({
+        paused: true,
         defaults: {
             duration: 1
         },
-        onComplete: (0, _bounce.bounce)
+        onComplete: (0, _bounce.bounce // bag movement at set intervals to attract user attention
+        )
     });
     tl.from(".hill-1", {
         autoAlpha: 0,
@@ -547,9 +550,11 @@ function scene() {
         pointerEvents: "auto"
     });
     return tl;
-}
-function greeting() {
-    const tl = gsap.timeline();
+};
+const greeting = ()=>{
+    const tl = gsap.timeline({
+        paused: true
+    });
     gsap.set(".greeting h1, .greeting p", {
         autoAlpha: 1
     });
@@ -563,40 +568,88 @@ function greeting() {
         duration: 1
     }, "<");
     return tl;
-}
-ScrollTrigger.matchMedia({
-    // Mobile
-    "(max-width: 935px)": ()=>{
-        if (gsap.getProperty(".img-overlay", "opacity") === 1) return;
-        if (gsap.getProperty(".stickman-scene", "opacity") === 1) return;
-        gsap.set(".stickman-scene", {
-            autoAlpha: 0
-        });
-        gsap.to(".stickman-scene", {
-            scrollTrigger: {
-                trigger: ".stickman-scene",
-                start: "top 30%",
-                onEnter: ()=>{
-                    if (gsap.getProperty(".stickman-scene", "opacity") === 1) return;
-                    scene().play();
-                }
-            },
-            autoAlpha: 1,
-            duration: 0.5
-        });
-        greeting().play();
-    },
-    // Desktop
-    "(min-width: 935px)": ()=>{
-        if (gsap.getProperty(".stickman-scene", "opacity") === 1) return;
-        gsap.set(".stickman-scene", {
-            autoAlpha: 1
-        });
-        scene().play();
-        greeting().play().delay(0.5);
-    }
+};
+const sceneTl = scene();
+const greetingTl = greeting();
+window.addEventListener("load", ()=>{
+    ScrollTrigger.matchMedia({
+        // Mobile
+        "(max-width: 934px)": ()=>{
+            if ((0, _master.master).progress() > 0) return;
+            if (sceneTl.progress() > 0) return;
+            if (greetingTl.progress() === 0) greetingTl.play();
+            gsap.set(".stickman-scene", {
+                autoAlpha: 0
+            });
+            gsap.to(".stickman-scene", {
+                scrollTrigger: {
+                    trigger: ".stickman-scene",
+                    start: "top 30%",
+                    onEnter: ()=>{
+                        if (sceneTl.progress() === 0 && document.readyState === "complete") console.log(document.readyState);
+                        sceneTl.play();
+                    }
+                },
+                autoAlpha: 1,
+                duration: 0.5
+            });
+        },
+        // Desktop
+        "(min-width: 935px)": ()=>{
+            gsap.set(".stickman-scene", {
+                autoAlpha: 1
+            });
+            if (sceneTl.progress() === 0) sceneTl.play();
+            if (greetingTl.progress() === 0) greetingTl.play().delay(0.5);
+        }
+    });
 });
 
-},{"../stickman/bounce":"iEcuG"}]},["e60Gz","6yAQ6"], "6yAQ6", "parcelRequire3f98")
+},{"../stickman/bounce":"iEcuG","../stickman/master":"kB96Y"}],"iEcuG":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "bounce", ()=>bounce);
+var _master = require("./master");
+function bounce() {
+    if ((0, _master.master).progress() > 0) return;
+    const allTweens = gsap.globalTimeline.getChildren();
+    if (allTweens.every((tween)=>!tween.isActive())) {
+        const tl = gsap.timeline({
+            repeat: 1,
+            onComplete: ()=>{
+                gsap.delayedCall(10, bounce);
+            }
+        });
+        tl.to(".bag-1", {
+            duration: 0.25,
+            ease: "back.out(4)",
+            scaleX: 1.2,
+            scaleY: 0.9
+        }, 0).to(".bag-1", {
+            duration: 0.25,
+            ease: "back.out(4)",
+            scaleX: 1,
+            scaleY: 1
+        }, 0.25).set(".bag-shadow-1", {
+            autoAlpha: 0
+        }, 0).set(".bag-shadow-d-1", {
+            autoAlpha: 1
+        }, ">").set(".bag-shadow-d-1", {
+            autoAlpha: 0
+        }, 0.15).set(".bag-shadow-d-2", {
+            autoAlpha: 1
+        }, ">").set(".bag-shadow-d-2", {
+            autoAlpha: 0
+        }, 0.24).set(".bag-shadow-d-1", {
+            autoAlpha: 1
+        }, ">").set(".bag-shadow-d-1", {
+            autoAlpha: 0
+        }, 0.33).set(".bag-shadow-1", {
+            autoAlpha: 1
+        }, ">");
+    }
+}
+
+},{"./master":"kB96Y","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["e60Gz","6yAQ6"], "6yAQ6", "parcelRequire3f98")
 
 //# sourceMappingURL=index.774a9cbe.js.map
