@@ -1,3 +1,5 @@
+// Icons 'fan out' animate along path
+
 import { makeIconButtons } from './text_anim'
 
 export function fanOut() {

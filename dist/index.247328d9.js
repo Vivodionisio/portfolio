@@ -514,8 +514,17 @@ gsap.from("section.about h2", {
     y: 20,
     duration: 0.4
 });
-const aboutEle = gsap.utils.toArray("section.about p");
-aboutEle.forEach((element)=>{
+const aboutP = gsap.utils.toArray("section.about p");
+const aboutH3 = gsap.utils.toArray("section.about h3");
+const aboutItem = gsap.utils.toArray("section.about .item");
+const aboutDiv = gsap.utils.toArray("section.about .wrapper div");
+const elements = [
+    ...aboutP,
+    ...aboutH3,
+    ...aboutItem,
+    ...aboutDiv
+];
+elements.forEach((element)=>{
     gsap.from(element, {
         scrollTrigger: {
             trigger: element,
@@ -526,13 +535,13 @@ aboutEle.forEach((element)=>{
         stagger: 0.4
     });
 });
-gsap.from(".resume", {
+gsap.from(".about .resume", {
     scrollTrigger: {
         trigger: ".resume",
         start: "top 90%"
     },
     autoAlpha: 0,
-    y: "20",
+    y: 20,
     duration: 0.4
 });
 // Projects

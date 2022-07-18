@@ -5,19 +5,37 @@ section.about {
   margin: auto;
 }
 
-section.about h3 {
+section.about .skills h3 {
   margin-top: 100px;
+  margin-bottom: 27px;
 }
 
 section.about p, section.about span {
-  width: 49%;
+  width: 663px;
   margin: auto;
-  font-size: .9rem;
+  font-size: 1rem;
 }
 
-section.about p:nth-child(3), section.about p:nth-child(4) {
+section.about .skills p:nth-child(2), section.about p:nth-child(4) {
   margin-top: 27px;
   margin-bottom: 27px;
+}
+
+section.about .skills .wrapper {
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 80px;
+  display: flex;
+}
+
+section.about .skills .wrapper .left, section.about .skills .wrapper .center, section.about .skills .wrapper .right {
+  width: 200px;
+  padding: 0 50px;
+}
+
+section.about .software .items {
+  flex-direction: column;
+  display: flex;
 }
 
 section.about .resume {
@@ -53,9 +71,42 @@ section.about .resume a:hover {
   }
 }
 
+@media screen and (max-width: 885px) {
+  section.about p, section.about span {
+    width: 450px;
+  }
+}
+
 @media screen and (max-width: 720px) {
   .page .container section.about {
     width: calc(100% - 80px);
+  }
+}
+
+@media screen and (max-width: 530px) {
+  section.about p, section.about span {
+    width: 100%;
+  }
+
+  section.about p, section.about span, section.about h3, h2, .resume, .wrapper {
+    text-align: left;
+  }
+
+  .item {
+    display: inline-block;
+  }
+
+  section.about .skills .wrapper {
+    margin-bottom: 0;
+    display: block;
+  }
+
+  section.about .skills .wrapper .left, section.about .skills .wrapper .right, section.about .skills .wrapper .center {
+    padding: 0;
+  }
+
+  section.about .skills h3 {
+    margin-top: 50px;
   }
 }
 
@@ -67,6 +118,12 @@ section.about .resume a:hover {
   section.about p {
     width: 100%;
     min-width: unset;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .page .container section.about {
+    width: calc(100% - 40px);
   }
 }
 

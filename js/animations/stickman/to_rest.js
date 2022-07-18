@@ -1,3 +1,5 @@
+// After fan out it complete, stickman returns to original stance.
+
 export function toRest() {
   const tl = gsap.timeline({
     defaults: { duration: 0 }

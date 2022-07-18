@@ -14,6 +14,7 @@
   <script src="/index.373584a1.js" defer=""></script>
   <script src="/index.774a9cbe.js" defer=""></script>
   <script src="/index.247328d9.js" defer=""></script>
+  <script src="/index.00fe7545.js" defer=""></script>
   <link rel="stylesheet" href="https://use.typekit.net/mrz1vgw.css">
   <link rel="stylesheet" href="/index.f88e0379.css">
   <link rel="stylesheet" href="/index.748ad148.css">
@@ -21,6 +22,7 @@
   <link rel="stylesheet" href="/index.f04df894.css">
   <link rel="stylesheet" href="/index.8f2a9608.css">
   <link rel="stylesheet" href="/index.b2be79b7.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.e85825cd.ico">
   <title>My Portfolio</title>
 </head>
 <body>
@@ -31,10 +33,18 @@
         <div class="topbar">
           <img src="/me.ae104bad.webp" alt="me">
           <div class="nav">
-            <a href="#about">about</a>
-            <a href="#projects">projects</a>
-            <a href="/assets/cv/saulnewbury_cv.pdf" target="_blank">résumé</a>
-            <a href="mailto:hello@saulnewbury.com">contact</a>
+            <a class="nav__item-hover" href="#about" data-id="about">
+              <span class="nav__item-hover-inner" data-hover="about">about</span>
+            </a>
+            <a class="nav__item-hover" href="#projects" data-id="projects">
+              <span class="nav__item-hover-inner" data-hover="projects">projects</span>
+            </a>
+            <a class="nav__item-hover" href="/assets/cv/saulnewbury_cv.pdf" data-id="résumé" target="_blank">
+              <span class="nav__item-hover-inner" data-hover="résumé">résumé</span>
+            </a>
+            <a class="nav__item-hover" href="mailto:hello@saulnewbury.com" data-id="contact">
+              <span class="nav__item-hover-inner" data-hover="contact">contact</span>
+            </a>
           </div>
         </div>
         <div class="greeting">
@@ -494,24 +504,39 @@
           But, after developing tinnitus, I needed a profession where my tenacious, curious, problem-solving qualities could be put to best use. And coding is perfect.  <br><br>
           I find development immensely satisfying. There’s beauty in functionality, and I love the challenge of writing ever-cleaner code.  <br>
         </p>
-        <h3>Skills</h3>
-        <p><!-- I’m proficient in the following tools and software: -->
-          I have experience working with the following tools and software:</p>
-        <p>
-          <span>HTML</span><br>
-          <span>CSS</span><br>
-          <span data-time-elapsed="2022-01-01">Sass</span><br>
-          <span data-time-elapsed="2021-09-01">Javascript</span><br>
-          <span data-time-elapsed="2022-01-01">React</span><br>
-          <span data-time-elapsed="2022-04-16">GSAP</span><br>
-          <span data-time-elapsed="2022-04-01">SVG</span><br>
-          <span data-time-elapsed="2021-10-01">NPM</span><br>
-          <span data-time-elapsed="2021-11-01">Github</span><br>
-          <span data-time-elapsed="2021-10-01">API's</span><br><br>
-          <span data-time-elapsed="five+ years">Affinity Designer</span><br>
-          <span data-time-elapsed="five+ years">Adobe Illustrator</span><br>
-          <span data-time-elapsed="ten+ years">Adobe Photoshop</span><br>
-        </p>
+        <div class="skills">
+          <h3>Skills</h3>
+          <p>
+            I have experience working with the following tools and software:
+          </p>
+          <div class="wrapper">
+            <div class="left">
+              <span>HTML</span><br>
+              <span>CSS</span><br>
+              <span data-time-elapsed="2022-01-01">Sass</span><br>
+              <span data-time-elapsed="2021-09-01">Javascript</span><br>
+            </div>
+            <div class="center">
+              <span data-time-elapsed="2022-01-01">React</span><br>
+              <span data-time-elapsed="2022-04-16">GSAP</span><br>
+              <span data-time-elapsed="2022-04-01">SVG</span><br>
+            </div>
+            <div class="right">
+              <span data-time-elapsed="2021-10-01">NPM</span><br>
+              <span data-time-elapsed="2021-11-01">Github</span><br>
+              <span data-time-elapsed="2021-10-01">API's</span><br><br>
+            </div>
+          </div>
+          <div class="Software">
+            <h3>Software</h3>
+            <div class="items">
+              <span class="item" data-time-elapsed="five+ years">Affinity Designer</span><br>
+              <span class="item" data-time-elapsed="five+ years">Adobe Illustrator</span><br>
+              <span class="item" data-time-elapsed="ten+ years">Adobe Photoshop</span><br>
+              <span class="item" data-time-elapsed="ten+ years">Sketch</span><br>
+            </div>
+          </div>
+        </div>
         <div class="resume">
           <span>Download my &nbsp;<a href="/assets/cv/saulnewbury_cv.pdf" target="_blank">Résumé<svg><use href="#download"></use></svg></a></span>
         </div>
@@ -532,7 +557,7 @@
               <p class="date">June/9</p>
               <h3 class="title">Portfolio</h3>
               <p class="about features">GSAP / Date-fns</p>
-              <p class="about">I took this project as an opportunity to explore, a little deeper, the GSAP library. <br> Check out the code on github.
+              <p class="about">For this project I used GSAP to bring a stickman with his bag of tricks to life. It threw up a range of interesting challenges, from cross browser compatability issues to the organisation of complex animation and SVG.
                </p><div class="icons">
                 <div class="wrapper">
                   <a href="https://github.com/Vivodionisio/portfolio" target="_blank">
@@ -551,14 +576,14 @@
             <div class="info">
               <p class="date">Mar/22</p>
               <h3 class="title">Netflix Slider Clone</h3>
-              <p class="about features">Sass / The Movie Database Api / React / GSAP</p>
-              <p class="about">The aim for this project was to create a slider that behaves just as the Neflix sliders behave, from the users perspective. <br>(view on desktop)</p>
+              <p class="about features">Sass / TMDB Api / React / GSAP</p>
+              <p class="about">In this project I got to know the TMDB Api. Foreseeing a potential issue, I created a cache to prevent additional fetches should a given item appear in more than one list. To handle complexity, I switched from vanilla JS to GSAP for the animations. The result: a slider whose look and feel conform nicely to that of Netflix’s slider. (view on desktop)</p>
               <div class="icons">
                 <div class="wrapper">
                   <a href="https://github.com/Vivodionisio/netflix-slider-clone" target="_blank">
                     <svg class="icon"><use href="#github"></use></svg>
                   </a>
-                  <a href="https://bespoke-elf-f0be8c.netlify.app/" target="_blank">
+                  <a href="https://saulnewbury.com/netflix-slider-clone/" target="_blank">
                     <svg class="icon"><use href="#ext-link"></use></svg>                
                   </a>
                 </div>
@@ -566,7 +591,7 @@
             </div>
           </div>
           <div class="right">
-            <a class="board" href="https://bespoke-elf-f0be8c.netlify.app/" target="_blank">
+            <a class="board" href="https://saulnewbury.com/netflix-slider-clone/" target="_blank">
               <img src="/netflix-thumb.02918395.webp" alt="">
               <div class="overlay"></div>
             </a>
@@ -575,7 +600,7 @@
         </div>
         <div class="exibit">
           <div class="left">
-            <a class="board" href="https://festive-pare-76a99d.netlify.app/" target="”_blank”">
+            <a class="board" href="https://saulnewbury.com/fb-clone/" target="”_blank”">
               <img src="/fb-thumb.e5c5f047.webp" alt="">
               <img class="fb-small_screen" src="/fb-sml_screen-thumb.bd4b2210.webp" alt="">
               <img class="fb-engagements" src="/fb-engagements.f55a50dd.png" width="2105.93" height="367.5" alt="emoji engagements exibit">
@@ -587,13 +612,13 @@
               <p class="date">Jan/22</p>
               <h3 class="title">Facebook UI Clone</h3>
               <p class="about features">Sass / React / Styled Components</p>
-              <p class="about">This was my first React project in which I could practice the reactive way of doing things, using hooks, component reuse, and libraries such as react-router-dom.</p>
+              <p class="about">This project was an exercise in the reactive way of doing things, using React Hooks, Styled Components and React Router, resulting in home and profile pages, featuring active navigation, modals, animated and emojis, as employed on facebook's own site.</p>
                <div class="icons">
                 <div class="wrapper">
                   <a href="https://github.com/Vivodionisio/facebook-clone-frontend" target="_blank">
                     <svg class="icon"><use href="#github"></use></svg>
                   </a>
-                  <a href="https://festive-pare-76a99d.netlify.app/" target="_blank">
+                  <a href="https://saulnewbury.com/fb-clone/" target="_blank">
                     <svg class="icon"><use href="#ext-link"></use></svg>                
                   </a>
                 </div>

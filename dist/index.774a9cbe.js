@@ -546,7 +546,7 @@ const scene = ()=>{
         x: "50px",
         duration: 0.8,
         ease: "elastic.out(1, 0.75)"
-    }, "<10%").to(".phantum-element, .bag-1", {
+    }, "<10%").set(".phantum-element, .bag-1", {
         pointerEvents: "auto"
     });
     return tl;
@@ -609,45 +609,43 @@ window.addEventListener("load", ()=>{
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "bounce", ()=>bounce);
+// Bag bounce animation to attract user attention
 var _master = require("./master");
 function bounce() {
     if ((0, _master.master).progress() > 0) return;
-    const allTweens = gsap.globalTimeline.getChildren();
-    if (allTweens.every((tween)=>!tween.isActive())) {
-        const tl = gsap.timeline({
-            repeat: 1,
-            onComplete: ()=>{
-                gsap.delayedCall(10, bounce);
-            }
-        });
-        tl.to(".bag-1", {
-            duration: 0.25,
-            ease: "back.out(4)",
-            scaleX: 1.2,
-            scaleY: 0.9
-        }, 0).to(".bag-1", {
-            duration: 0.25,
-            ease: "back.out(4)",
-            scaleX: 1,
-            scaleY: 1
-        }, 0.25).set(".bag-shadow-1", {
-            autoAlpha: 0
-        }, 0).set(".bag-shadow-d-1", {
-            autoAlpha: 1
-        }, ">").set(".bag-shadow-d-1", {
-            autoAlpha: 0
-        }, 0.15).set(".bag-shadow-d-2", {
-            autoAlpha: 1
-        }, ">").set(".bag-shadow-d-2", {
-            autoAlpha: 0
-        }, 0.24).set(".bag-shadow-d-1", {
-            autoAlpha: 1
-        }, ">").set(".bag-shadow-d-1", {
-            autoAlpha: 0
-        }, 0.33).set(".bag-shadow-1", {
-            autoAlpha: 1
-        }, ">");
-    }
+    const tl = gsap.timeline({
+        repeat: 1,
+        onComplete: ()=>{
+            gsap.delayedCall(10, bounce);
+        }
+    });
+    tl.to(".bag-1", {
+        duration: 0.25,
+        ease: "back.out(4)",
+        scaleX: 1.2,
+        scaleY: 0.9
+    }, 0).to(".bag-1", {
+        duration: 0.25,
+        ease: "back.out(4)",
+        scaleX: 1,
+        scaleY: 1
+    }, 0.25).set(".bag-shadow-1", {
+        autoAlpha: 0
+    }, 0).set(".bag-shadow-d-1", {
+        autoAlpha: 1
+    }, ">").set(".bag-shadow-d-1", {
+        autoAlpha: 0
+    }, 0.15).set(".bag-shadow-d-2", {
+        autoAlpha: 1
+    }, ">").set(".bag-shadow-d-2", {
+        autoAlpha: 0
+    }, 0.24).set(".bag-shadow-d-1", {
+        autoAlpha: 1
+    }, ">").set(".bag-shadow-d-1", {
+        autoAlpha: 0
+    }, 0.33).set(".bag-shadow-1", {
+        autoAlpha: 1
+    }, ">");
 }
 
 },{"./master":"kB96Y","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["e60Gz","6yAQ6"], "6yAQ6", "parcelRequire3f98")

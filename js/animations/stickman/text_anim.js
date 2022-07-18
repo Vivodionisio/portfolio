@@ -1,3 +1,5 @@
+// Hover over icons too see experience represented by time alapsed from beginning to learn a given technology or tool.
+
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 gsap.registerPlugin(TextPlugin)
 
@@ -16,7 +18,6 @@ export function makeIconButtons() {
   icons.forEach((icon, idx) => {
     const textEle = svgTextEles[idx]
     const dateBegan = textEle.getAttribute('data-time-elapsed')
-    console.log(dateBegan)
     // get time elapsed
     const prevTime = new Date(dateBegan)
     const thisTime = new Date()

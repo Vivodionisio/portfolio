@@ -25,12 +25,6 @@
   left: 0;
 }
 
-.topbar .nav a {
-  cursor: pointer;
-  margin-left: 15px;
-  font-size: 1rem;
-}
-
 .topbar img {
   width: 45px;
   height: 45px;
@@ -38,16 +32,44 @@
   border-radius: 50%;
 }
 
-.topbar .theme-toggle-btn {
-  height: fit-content;
+.topbar .nav a {
   cursor: pointer;
-  background-color: #0000;
-  border: none;
-  justify-content: flex-end;
+  margin-left: 15px;
+  font-size: 1rem;
 }
 
-.topbar .theme-toggle-btn svg {
-  fill: var(--dark-1);
+.nav__item-hover-inner[data-hover] {
+  color: var(--text-color);
+  position: relative;
+}
+
+.nav__item-hover-inner:before {
+  content: attr(data-hover);
+  width: 0;
+  white-space: nowrap;
+  color: var(--primary);
+  transition: all .3s cubic-bezier(1, 0, 0, 1);
+  position: absolute;
+  top: -2px;
+  left: 0;
+  overflow: hidden;
+}
+
+.nav__item-hover-inner:after {
+  content: attr(data-hover);
+  width: 0;
+  white-space: nowrap;
+  color: var(--text-color);
+  color: var(--text-color);
+  transition: all .3s cubic-bezier(1, 0, 0, 1) .2s;
+  position: absolute;
+  top: -2px;
+  left: 0;
+  overflow: hidden;
+}
+
+.nav__item-hover:hover .nav__item-hover-inner:after, .nav__item-hover:hover .nav__item-hover-inner:before {
+  width: 100%;
 }
 
 .greeting, .greeting h1 {
@@ -237,7 +259,13 @@ g#columns, #columns1, #columns2, #columns3 {
   }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 385px) {
+  .page .scene svg {
+    right: -311px;
+  }
+}
+
+@media screen and (max-width: 375px) {
   .greeting {
     top: 200px;
     left: 20px;
@@ -245,10 +273,6 @@ g#columns, #columns1, #columns2, #columns3 {
 
   .greeting p {
     width: 316px;
-  }
-
-  .greeting h1 {
-    font-size: 3.5rem;
   }
 }
 

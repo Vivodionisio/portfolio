@@ -59,7 +59,7 @@ const scene = () => {
       },
       '<10%'
     )
-    .to('.phantum-element, .bag-1', { pointerEvents: 'auto' })
+    .set('.phantum-element, .bag-1', { pointerEvents: 'auto' })
   return tl
 }
 

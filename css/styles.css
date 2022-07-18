@@ -50,7 +50,7 @@ a {
 p,
 span,
 a span {
-  font-size: 0.8rem;
+  font-size: 1rem; /* .8 */
 }
 
 h1,

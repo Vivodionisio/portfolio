@@ -1,3 +1,5 @@
+// Random blink
+
 export function blink() {
   const allTweens = gsap.globalTimeline.getChildren()
   if (allTweens.every(tween => !tween.isActive())) {

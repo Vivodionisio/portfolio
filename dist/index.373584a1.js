@@ -543,6 +543,7 @@ eleArray.forEach((ele)=>{
 },{"./tada":"bU9V8","./fanout":"7gO4I","./blink":"gKKXK","./shadow_morph":"d3YGf","./bag":"dfaA0","./overlay":"l7kp3","./to_rest":"eWK60","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bU9V8":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+// Stick man gesture toward bag, which thereupon opens for icons to fanout (see bag.js and fanout/js)
 parcelHelpers.export(exports, "taDa", ()=>taDa);
 parcelHelpers.export(exports, "lookLeft", ()=>lookLeft);
 function taDa() {
@@ -628,6 +629,7 @@ exports.export = function(dest, destName, get) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "fanOut", ()=>fanOut);
+// Icons 'fan out' animate along path
 var _textAnim = require("./text_anim");
 function fanOut() {
     gsap.set(".html5, .css3, .sass, .javascript, .api, .npm, .github, .svg, .greensock, .react", {
@@ -793,6 +795,7 @@ function fanOut() {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "makeIconButtons", ()=>makeIconButtons);
+// Hover over icons too see experience represented by time alapsed from beginning to learn a given technology or tool.
 var _formatDistanceToNow = require("date-fns/formatDistanceToNow");
 var _formatDistanceToNowDefault = parcelHelpers.interopDefault(_formatDistanceToNow);
 gsap.registerPlugin(TextPlugin);
@@ -816,7 +819,6 @@ function makeIconButtons() {
     icons.forEach((icon, idx)=>{
         const textEle = svgTextEles[idx];
         const dateBegan = textEle.getAttribute("data-time-elapsed");
-        console.log(dateBegan);
         // get time elapsed
         const prevTime = new Date(dateBegan);
         const thisTime = new Date();
@@ -1820,6 +1822,7 @@ exports.default = getTimezoneOffsetInMilliseconds;
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gKKXK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+// Random blink
 parcelHelpers.export(exports, "blink", ()=>blink);
 function blink() {
     const allTweens = gsap.globalTimeline.getChildren();
@@ -1852,6 +1855,7 @@ function blink() {
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"d3YGf":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+// Stickman shadow morphs as the scene dissapears behin him (see overlay.js)
 parcelHelpers.export(exports, "shadowMorph", ()=>shadowMorph);
 function shadowMorph() {
     const tl = gsap.timeline({
@@ -1886,6 +1890,7 @@ function shadowMorph() {
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dfaA0":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+// bag distorts and then opens before icons animate along path to their position (see fanout.js)
 parcelHelpers.export(exports, "bagDistorts", ()=>bagDistorts);
 parcelHelpers.export(exports, "bagOpens", ()=>bagOpens);
 function bagDistorts() {
@@ -1974,6 +1979,7 @@ function bagOpens() {
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l7kp3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+// Overlay comes fades into view as icons fan out (see fanout.js)
 parcelHelpers.export(exports, "overlay", ()=>overlay);
 function overlay() {
     const tl = gsap.timeline({
@@ -1997,6 +2003,7 @@ function overlay() {
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eWK60":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+// After fan out it complete, stickman returns to original stance.
 parcelHelpers.export(exports, "toRest", ()=>toRest);
 function toRest() {
     const tl = gsap.timeline({

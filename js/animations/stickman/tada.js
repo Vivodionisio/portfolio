@@ -1,3 +1,5 @@
+// Stick man gesture toward bag, which thereupon opens for icons to fanout (see bag.js and fanout/js)
+
 export function taDa() {
   const tl = gsap.timeline()
   tl.set('.stickman-1, .shadow-1', { autoAlpha: 0, delay: 0.3 })

@@ -1,3 +1,5 @@
+// Overlay comes fades into view as icons fan out (see fanout.js)
+
 export function overlay() {
   const tl = gsap.timeline({ defaults: { duration: 1 } })
 
