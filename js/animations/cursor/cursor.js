@@ -78,7 +78,7 @@ function calculateDistance(mouseX, mouseY) {
   )
 }
 
-// Styles for mouseenter and mouseleave
+// Styles for mouse/stickman-scene interaction
 stickmanScene.addEventListener('mouseenter', dotToArrow)
 stickmanScene.addEventListener('mouseleave', arrowToDot)
 hero.addEventListener('mouseleave', arrowToDot)
@@ -93,6 +93,12 @@ function arrowToDot() {
   gsap.to('.cursor', { '--scale': 1 })
   gsap.set('.arrow-cursor', { autoAlpha: 0 })
 }
+
+// Styles for mouse/window interaction
+document.addEventListener('mouseleave', () => {
+  console.log('beautiful')
+  gsap.set('.custom-cursor', { autoAlpha: 0 })
+})
 
 // Remove Arrow after stickman animation is complete
 export function rmvRedundantArrow() {

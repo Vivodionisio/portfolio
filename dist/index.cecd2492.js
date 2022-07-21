@@ -820,7 +820,7 @@ function calculateDistance(mouseX, mouseY) {
     rect.left;
     return Math.floor(Math.sqrt(Math.pow(mouseX - (rect.left + rect.width / 2), 2) + Math.pow(mouseY - (rect.top + rect.height / 2), 2)));
 }
-// Styles for mouseenter and mouseleave
+// Styles for mouse/stickman-scene interaction
 stickmanScene.addEventListener("mouseenter", dotToArrow);
 stickmanScene.addEventListener("mouseleave", arrowToDot);
 hero.addEventListener("mouseleave", arrowToDot);
@@ -843,6 +843,13 @@ function arrowToDot() {
         autoAlpha: 0
     });
 }
+// Styles for mouse/window interaction
+document.addEventListener("mouseleave", ()=>{
+    console.log("beautiful");
+    gsap.set(".custom-cursor", {
+        autoAlpha: 0
+    });
+});
 function rmvRedundantArrow() {
     gsap.to(".arrow-cursor", {
         autoAlpha: 0
