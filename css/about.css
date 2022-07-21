@@ -13,7 +13,7 @@ section.about .skills h3 {
 section.about p,
 section.about span {
   font-size: 1rem;
-  width: 663px;
+  max-width: 663px; /* 663 */
   margin: auto;
 }
 
@@ -24,17 +24,17 @@ section.about p:nth-child(4) {
 }
 
 section.about .skills .wrapper {
+  margin: auto;
   margin-top: 50px;
   margin-bottom: 80px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
-section.about .skills .wrapper .left,
-section.about .skills .wrapper .center,
-section.about .skills .wrapper .right {
-  width: 200px;
-  padding: 0 50px;
+.tech-item {
+  display: inline-block;
 }
 
 section.about .software .items {
@@ -71,6 +71,12 @@ section.about .resume a:hover {
   transition: all 0.5s;
 }
 
+@media screen and (min-width: 530px) {
+  .tech-item:not(.tech-item:last-child)::after {
+    content: ' /';
+  }
+}
+
 @media screen and (max-width: 1080px) {
   section.about p {
     min-width: 238px;
@@ -78,9 +84,12 @@ section.about .resume a:hover {
 }
 
 @media screen and (max-width: 885px) {
-  section.about p,
-  section.about span {
+  section.about p {
     width: 450px;
+  }
+
+  section.about .skills .wrapper div {
+    width: 377px;
   }
 }
 
@@ -105,23 +114,24 @@ section.about .resume a:hover {
     text-align: left;
   }
 
-  .item {
-    display: inline-block;
-  }
-
   section.about .skills .wrapper {
     display: block;
     margin-bottom: 0;
   }
 
-  section.about .skills .wrapper .left,
-  section.about .skills .wrapper .right,
-  section.about .skills .wrapper .center {
+  section.about .skills .wrapper div {
     padding: 0;
+  }
+  section.about .tech-item {
+    display: block;
   }
 
   section.about .skills h3 {
     margin-top: 50px;
+  }
+
+  .item {
+    display: inline-block;
   }
 }
 

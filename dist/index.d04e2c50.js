@@ -142,14 +142,14 @@
       this[globalName] = mainExports;
     }
   }
-})({"gkZwO":[function(require,module,exports) {
+})({"8MfBH":[function(require,module,exports) {
 "use strict";
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "3ba154a7373584a1";
+module.bundle.HMR_BUNDLE_ID = "60905544d04e2c50";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, importScripts */ /*::
 import type {
   HMRAsset,
@@ -502,81 +502,95 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"kB96Y":[function(require,module,exports) {
+},{}],"6Y786":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "master", ()=>master);
-var _blink = require("./blink");
-const master = gsap.timeline({
-    paused: true,
-    onComplete: (0, _blink.blink)
+parcelHelpers.export(exports, "rmvRedundantArrow", ()=>rmvRedundantArrow);
+const body = document.querySelector("body");
+const stickmanScene = document.querySelector(".stickman-scene");
+const cursor = document.querySelector(".cursor");
+const arrow = document.querySelector(".arrow-cursor");
+const phantumElement = document.querySelector(".phantum-element");
+const techItems = [
+    ...document.querySelectorAll(".tech-item")
+];
+let y, x;
+body.addEventListener("mousemove", (e)=>{
+    // Set position for svg (replacement cursor)
+    x = e.clientX;
+    y = e.clientY;
+    cursor.setAttribute("style", `top: ${e.clientY - 17}px; 
+      left: ${e.clientX - 18}px; 
+      opacity: ${1};`);
 });
-(0, _blink.blink)();
-
-},{"./blink":"gKKXK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gKKXK":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-// Random blink
-// Imports to master.js
-parcelHelpers.export(exports, "blink", ()=>blink);
-function blink() {
-    const allTweens = gsap.globalTimeline.getChildren();
-    if (allTweens.every((tween)=>!tween.isActive())) {
-        const tl = gsap.timeline({
-            defaults: {
-                duration: 0.1
-            }
-        });
-        tl.set(".stickman-9-blink", {
-            autoAlpha: 1,
-            delay: 0.5
-        }).to(".stickman-9-blink", {
-            autoAlpha: 0,
-            delay: 0.15,
-            onComplete: ()=>{
-                const num = gsap.utils.random(2, 6, 0.1);
-                // console.log(num)
-                gsap.delayedCall(num, blink);
-            }
-        });
-    } else {
-        setTimeout(()=>{
-            blink();
-        }, 3000);
-        return;
-    }
+stickmanScene.addEventListener("mouseenter", dotToArrow);
+stickmanScene.addEventListener("mouseleave", arrowToDot);
+function dotToArrow() {
+    gsap.set(".dot-cursor", {
+        autoAlpha: 0
+    });
+    gsap.set(".arrow-cursor", {
+        autoAlpha: 1
+    });
 }
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
+function arrowToDot() {
+    gsap.set(".dot-cursor", {
+        autoAlpha: 1
     });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
+    gsap.set(".arrow-cursor", {
+        autoAlpha: 0
     });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
+}
+function rmvRedundantArrow() {
+    gsap.set(".arrow-cursor", {
+        autoAlpha: 0
     });
-};
+    gsap.set(".dot-cursor", {
+        autoAlpha: 1
+    });
+    stickmanScene.removeEventListener("mouseenter", dotToArrow);
+    stickmanScene.removeEventListener("mouseleave", arrowToDot);
+}
+// Rotate Arrow Cursor On Mousemove
+stickmanScene.addEventListener("mousemove", (e)=>{
+    // Get angle between cursor and stickman
+    const rect = phantumElement.getBoundingClientRect();
+    const w = rect.left + rect.width / 2;
+    const h = rect.top + rect.height / 2;
+    const deltaX = w - x;
+    const deltaY = h - y;
+    const rad = Math.atan2(deltaY, deltaX);
+    let deg = Math.round(rad * (180 / Math.PI));
+    // 360 deg variation
+    if (deg < 0) deg = (deg + 360) % 360;
+    console.log(deg);
+    arrow.style.setProperty("transform", `rotate(${deg + 90}deg)`);
+});
+// Rotate Arrow Cursor On Scroll
+document.addEventListener("scroll", (e)=>{
+    const rect = phantumElement.getBoundingClientRect();
+    const w = rect.left + rect.width / 2;
+    const h = rect.top + rect.height / 2;
+    const deltaX = w - x;
+    const deltaY = h - y;
+    const rad = Math.atan2(deltaY, deltaX);
+    let deg = Math.round(rad * (180 / Math.PI));
+    // 360 deg variation
+    if (deg < 0) deg = (deg + 360) % 360;
+    arrow.style.setProperty("transform", `rotate(${deg + 90}deg)`);
+}) // techItems.forEach(item => {
+ //   item.addEventListener('mouseenter', rmvOuterCircle)
+ // })
+ // export function rmvOuterCircle() {
+ //   // gsap.to('.dot-cursor circle:first-child', {
+ //   //   scale: 0.2,
+ //   //   duration: 1
+ //   // })
+ // }
+ // Remove outer circle of dot-cursor when mouse enters specific elements
+ // throtteling - like a smaller framerate
+;
 
-},{}]},["gkZwO","kB96Y"], "kB96Y", "parcelRequire3f98")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["8MfBH","6Y786"], "6Y786", "parcelRequire3f98")
 
-//# sourceMappingURL=index.373584a1.js.map
+//# sourceMappingURL=index.d04e2c50.js.map

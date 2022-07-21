@@ -130,3 +130,47 @@ a:hover {
     padding-bottom: 90px;
   }
 }
+
+/* cursor */
+.custom-cursor {
+  opacity: 0;
+  width: 35px;
+  height: 35px;
+  position: fixed;
+  z-index: 500;
+  pointer-events: none;
+  transition: opacity 1s;
+}
+
+.cursor {
+  width: 35px;
+  height: 35px;
+  transition: opacity 1s;
+}
+
+.arrow-cursor,
+.dot-cursor,
+.dot-cursor circle:first-child {
+  transform-origin: center;
+}
+
+body {
+  cursor: none;
+}
+
+/* Starting custom cursor perameters */
+body:hover .cursor {
+  --scale: 0:
+  opacity: 1;
+  transform: scale(var(--scale))
+}
+
+body .cursor .arrow-cursor {
+  opacity: 0;
+}
+
+/* Experement for drag (not working) */
+/* .dot-cursor circle {
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+} */

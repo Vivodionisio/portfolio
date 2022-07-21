@@ -1,4 +1,5 @@
 // Hover over icons too see experience represented by time alapsed from beginning to learn a given technology or tool.
+// Imports to fanout.js
 
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 gsap.registerPlugin(TextPlugin)
@@ -25,11 +26,22 @@ export function makeIconButtons() {
     const diffInWords = `${formatDistanceToNow(new Date(dateBegan))} exp.` // date-fns
 
     icon.anim = type(textEle, diffMs, diffInWords)
+
     icon.addEventListener('mouseenter', () => {
+      const iconClass = icon.getAttribute('class').split(' ')[0]
       icon.anim.reversed(!icon.anim.reversed())
+      gsap.to('.dot-cursor', {
+        scale: 0,
+        autoAlpha: 0
+      })
+      gsap.to(`.${iconClass}`, { cursor: 'pointer' })
     })
     icon.addEventListener('mouseleave', () => {
       icon.anim.reversed(!icon.anim.reversed())
+      gsap.to('.dot-cursor', {
+        scale: 1,
+        autoAlpha: 1
+      })
     })
   })
 }

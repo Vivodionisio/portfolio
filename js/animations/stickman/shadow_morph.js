@@ -1,4 +1,5 @@
 // Stickman shadow morphs as the scene dissapears behin him (see overlay.js)
+// Imports to master.js
 
 export function shadowMorph() {
   const tl = gsap.timeline({

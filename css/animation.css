@@ -80,6 +80,7 @@
   visibility: hidden;
   fill: hsla(0, 0%, 20%, 1);
   /* fill: rgb(62 223 242); */
+
   cursor: pointer;
 }
 

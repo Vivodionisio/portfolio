@@ -1,5 +1,6 @@
 // Icons 'fan out' animate along path
 
+import { rmvRedundantArrow } from '../cursor/cursor'
 import { makeIconButtons } from './text_anim'
 
 export function fanOut() {
@@ -18,7 +19,8 @@ export function fanOut() {
       visibility: 'visible',
       ease: 'power.inOut'
     },
-    onComplete: makeIconButtons
+    onComplete: makeIconButtons,
+    onStart: rmvRedundantArrow
   })
 
   tl.to(

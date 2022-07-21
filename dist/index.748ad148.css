@@ -117,4 +117,37 @@ a:hover {
   }
 }
 
+.custom-cursor {
+  opacity: 0;
+  width: 35px;
+  height: 35px;
+  z-index: 500;
+  pointer-events: none;
+  transition: opacity 1s;
+  position: fixed;
+}
+
+.cursor {
+  width: 35px;
+  height: 35px;
+  transition: opacity 1s;
+}
+
+.arrow-cursor, .dot-cursor, .dot-cursor circle:first-child {
+  transform-origin: center;
+}
+
+body {
+  cursor: none;
+}
+
+body:hover .cursor {
+  --scale: 0: opacity: 1;
+  transform: scale(var(--scale) );
+}
+
+body .cursor .arrow-cursor {
+  opacity: 0;
+}
+
 /*# sourceMappingURL=index.748ad148.css.map */

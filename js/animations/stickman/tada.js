@@ -1,4 +1,5 @@
 // Stick man gesture toward bag, which thereupon opens for icons to fanout (see bag.js and fanout/js)
+// Imports to master.js
 
 export function taDa() {
   const tl = gsap.timeline()

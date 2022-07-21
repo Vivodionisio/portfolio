@@ -1,4 +1,5 @@
 // bag distorts and then opens before icons animate along path to their position (see fanout.js)
+// Imports to master.js
 
 export function bagDistorts() {
   const tl = gsap.timeline()

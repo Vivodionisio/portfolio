@@ -1,4 +1,5 @@
 // Random blink
+// Imports to master.js
 
 export function blink() {
   const allTweens = gsap.globalTimeline.getChildren()

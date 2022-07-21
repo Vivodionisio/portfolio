@@ -517,13 +517,14 @@ gsap.from("section.about h2", {
 const aboutP = gsap.utils.toArray("section.about p");
 const aboutH3 = gsap.utils.toArray("section.about h3");
 const aboutItem = gsap.utils.toArray("section.about .item");
-const aboutDiv = gsap.utils.toArray("section.about .wrapper div");
+const aboutSpan = gsap.utils.toArray(".tech-item");
 const elements = [
     ...aboutP,
     ...aboutH3,
     ...aboutItem,
-    ...aboutDiv
+    ...aboutSpan
 ];
+console.log(aboutSpan);
 elements.forEach((element)=>{
     gsap.from(element, {
         scrollTrigger: {
