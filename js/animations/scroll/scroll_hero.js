@@ -3,7 +3,7 @@ import { bounce } from '../stickman/bounce'
 import { master } from '../stickman/master'
 
 gsap.set('.stickman-scene', { autoAlpha: 0 })
-gsap.set('.phantum-element, .bag-1', { pointerEvents: 'none' })
+gsap.set('.phantom-element, .bag-1', { pointerEvents: 'none' })
 
 const scene = () => {
   const tl = gsap.timeline({
@@ -59,7 +59,7 @@ const scene = () => {
       },
       '<10%'
     )
-    .set('.phantum-element, .bag-1', { pointerEvents: 'auto' })
+    .set('.phantom-element, .bag-1', { pointerEvents: 'auto' })
   return tl
 }
 

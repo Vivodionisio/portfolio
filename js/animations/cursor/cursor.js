@@ -3,7 +3,7 @@ const hero = document.querySelector('.hero')
 const stickmanScene = document.querySelector('.stickman-scene')
 const cursorDiv = document.querySelector('.custom-cursor')
 const arrow = document.querySelector('.arrow-cursor')
-const phantumElement = document.querySelector('.phantum-element')
+const phantomElement = document.querySelector('.phantom-element')
 // See text_anim.js for cursor animations related to the tech icons
 
 let y, x, distance
@@ -30,11 +30,12 @@ stickmanScene.addEventListener('mousemove', e => {
 // Call rotate
 document.addEventListener('scroll', e => {
   rotate()
+  scale()
 })
 
 // Rotate
 function rotate() {
-  const rect = phantumElement.getBoundingClientRect()
+  const rect = phantomElement.getBoundingClientRect()
 
   // Get middle of element
   const w = rect.left + rect.width / 2
@@ -68,7 +69,7 @@ function scale() {
 
 // Scale - calculate distance
 function calculateDistance(mouseX, mouseY) {
-  const rect = phantumElement.getBoundingClientRect()
+  const rect = phantomElement.getBoundingClientRect()
   rect.left
   return Math.floor(
     Math.sqrt(

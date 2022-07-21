@@ -509,7 +509,7 @@ gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 gsap.set(".stickman-scene", {
     autoAlpha: 0
 });
-gsap.set(".phantum-element, .bag-1", {
+gsap.set(".phantom-element, .bag-1", {
     pointerEvents: "none"
 });
 const scene = ()=>{
@@ -546,7 +546,7 @@ const scene = ()=>{
         x: "50px",
         duration: 0.8,
         ease: "elastic.out(1, 0.75)"
-    }, "<10%").set(".phantum-element, .bag-1", {
+    }, "<10%").set(".phantom-element, .bag-1", {
         pointerEvents: "auto"
     });
     return tl;

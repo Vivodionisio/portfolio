@@ -20,10 +20,10 @@ window.addEventListener('load', () => {
 })
 
 // Event Listener
-const phantumElement = document.querySelector('.phantum-element')
+const phantomElement = document.querySelector('.phantom-element')
 const bagElement = document.querySelector('.bag-1')
 
-const eleArray = [phantumElement, bagElement]
+const eleArray = [phantomElement, bagElement]
 eleArray.forEach(ele => {
   ele.addEventListener('mouseenter', () => {
     master.play()
