@@ -4,6 +4,7 @@ const stickmanScene = document.querySelector('.stickman-scene')
 const cursorDiv = document.querySelector('.custom-cursor')
 const arrow = document.querySelector('.arrow-cursor')
 const phantomElement = document.querySelector('.phantom-element')
+const anchorTags = [...document.querySelectorAll('a')]
 // See text_anim.js for cursor animations related to the tech icons
 
 let y, x, distance
@@ -21,13 +22,13 @@ body.addEventListener('mousemove', e => {
   )
 })
 
-// call rotate
+// call rotate and scale
 stickmanScene.addEventListener('mousemove', e => {
   rotate()
   scale()
 })
 
-// Call rotate
+// call rotate and scale
 document.addEventListener('scroll', e => {
   rotate()
   scale()
@@ -109,4 +110,18 @@ export function rmvRedundantArrow() {
   stickmanScene.removeEventListener('mouseleave', arrowToDot)
 }
 
+anchorTags.forEach(a => {
+  a.addEventListener('mouseenter', () => {
+    gsap.to('.dot-cursor', {
+      scale: 0,
+      autoAlpha: 0
+    })
+  })
+  a.addEventListener('mouseleave', () => {
+    gsap.to('.dot-cursor', {
+      scale: 1,
+      autoAlpha: 1
+    })
+  })
+})
 // throtteling - like a smaller framerate

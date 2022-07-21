@@ -761,14 +761,16 @@ function fanOut() {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 // Remove Arrow after stickman animation is complete
-parcelHelpers.export(exports, "rmvRedundantArrow", ()=>rmvRedundantArrow) // throtteling - like a smaller framerate
-;
+parcelHelpers.export(exports, "rmvRedundantArrow", ()=>rmvRedundantArrow);
 const body = document.querySelector("body");
 const hero = document.querySelector(".hero");
 const stickmanScene = document.querySelector(".stickman-scene");
 const cursorDiv = document.querySelector(".custom-cursor");
 const arrow = document.querySelector(".arrow-cursor");
 const phantomElement = document.querySelector(".phantom-element");
+const anchorTags = [
+    ...document.querySelectorAll("a")
+];
 // See text_anim.js for cursor animations related to the tech icons
 let y, x, distance;
 body.addEventListener("mousemove", (e)=>{
@@ -779,12 +781,12 @@ body.addEventListener("mousemove", (e)=>{
       left: ${e.clientX - 18}px; 
       opacity: 1;`);
 });
-// call rotate
+// call rotate and scale
 stickmanScene.addEventListener("mousemove", (e)=>{
     rotate();
     scale();
 });
-// Call rotate
+// call rotate and scale
 document.addEventListener("scroll", (e)=>{
     rotate();
     scale();
@@ -861,6 +863,21 @@ function rmvRedundantArrow() {
     stickmanScene.removeEventListener("mouseenter", dotToArrow);
     stickmanScene.removeEventListener("mouseleave", arrowToDot);
 }
+anchorTags.forEach((a)=>{
+    a.addEventListener("mouseenter", ()=>{
+        gsap.to(".dot-cursor", {
+            scale: 0,
+            autoAlpha: 0
+        });
+    });
+    a.addEventListener("mouseleave", ()=>{
+        gsap.to(".dot-cursor", {
+            scale: 1,
+            autoAlpha: 1
+        });
+    });
+}) // throtteling - like a smaller framerate
+;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ftWIl":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
