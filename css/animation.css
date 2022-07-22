@@ -1,19 +1,18 @@
 /* Initial state */
 
 .phantom-element {
-  cursor: pointer;
+  cursor: none;
 }
 
 .motion {
   opacity: 0;
   visibility: hidden;
   stroke-width: 50px;
-
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .stickman-1 {
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 .stickman-1,
 .shadow-1 {
@@ -47,6 +46,7 @@
 .shadow-morph-4 {
   opacity: 0;
   visibility: hidden;
+  cursor: none;
 }
 
 .bag-1 {
@@ -80,7 +80,6 @@
   visibility: hidden;
   fill: hsla(0, 0%, 20%, 1);
   /* fill: rgb(62 223 242); */
-
   cursor: pointer;
 }
 

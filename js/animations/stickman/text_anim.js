@@ -16,7 +16,9 @@ function type(ele, ms, words) {
 }
 
 export function makeIconButtons() {
+  gsap.set(icons, { pointerEvents: 'bounding-box' })
   icons.forEach((icon, idx) => {
+    gsap.set
     const textEle = svgTextEles[idx]
     const dateBegan = textEle.getAttribute('data-time-elapsed')
     // get time elapsed

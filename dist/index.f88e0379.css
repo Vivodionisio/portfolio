@@ -1,16 +1,11 @@
 .phantom-element {
-  cursor: pointer;
+  cursor: none;
 }
 
 .motion {
   opacity: 0;
   visibility: hidden;
   stroke-width: 50px;
-  cursor: pointer;
-}
-
-.stickman-1 {
-  cursor: pointer;
 }
 
 .stickman-1, .shadow-1 {
@@ -20,6 +15,7 @@
 .stickman-2, .stickman-3, .stickman-4, .stickman-5, .stickman-6, .stickman-7, .stickman-8, .stickman-9, .stickman-9-blink, .stickman-9-eyes-left, .stickman-r-1, .stickman-r-2, .stickman-hips, .shadow-2, .shadow-3, .shadow-4, .shadow-5, .shadow-6, .shadow-7, .shadow-8, .shadow-9, .shadow-morph-1, .shadow-morph-2, .shadow-morph-3, .shadow-morph-4 {
   opacity: 0;
   visibility: hidden;
+  cursor: none;
 }
 
 .bag-1 {
