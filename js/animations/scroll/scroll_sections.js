@@ -14,8 +14,6 @@ const aboutItem = gsap.utils.toArray('section.about .item')
 const aboutSpan = gsap.utils.toArray('.tech-item')
 const elements = [...aboutP, ...aboutH3, ...aboutItem, ...aboutSpan]
 
-console.log(aboutSpan)
-
 elements.forEach(element => {
   gsap.from(element, {
     scrollTrigger: { trigger: element, start: 'top 90%' },
