@@ -586,7 +586,7 @@ window.addEventListener("load", ()=>{
                     trigger: ".stickman-scene",
                     start: "top 30%",
                     onEnter: ()=>{
-                        if (sceneTl.progress() === 0 && document.readyState === "complete") console.log(document.readyState);
+                        if (sceneTl.progress() === 0 && document.readyState === "complete") // console.log(document.readyState)
                         sceneTl.play();
                     }
                 },

@@ -589,7 +589,37 @@ function lookLeft() {
     return tl;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7gO4I":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"7gO4I":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "fanOut", ()=>fanOut);
@@ -2101,6 +2131,51 @@ function toRest() {
         autoAlpha: 1
     });
     return tl;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kB96Y":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "master", ()=>master);
+var _blink = require("./blink");
+const master = gsap.timeline({
+    paused: true,
+    onComplete: (0, _blink.blink)
+});
+(0, _blink.blink)();
+
+},{"./blink":"gKKXK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gKKXK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+// Random blink
+// Imports to master.js
+parcelHelpers.export(exports, "blink", ()=>blink);
+function blink() {
+    const allTweens = gsap.globalTimeline.getChildren();
+    if (allTweens.every((tween)=>!tween.isActive())) {
+        const tl = gsap.timeline({
+            defaults: {
+                duration: 0.1
+            }
+        });
+        tl.set(".stickman-9-blink", {
+            autoAlpha: 1,
+            delay: 0.5
+        }).to(".stickman-9-blink", {
+            autoAlpha: 0,
+            delay: 0.15,
+            onComplete: ()=>{
+                const num = gsap.utils.random(2, 6, 0.1);
+                // console.log(num)
+                gsap.delayedCall(num, blink);
+            }
+        });
+    } else {
+        setTimeout(()=>{
+            blink();
+        }, 3000);
+        return;
+    }
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["3LWDw","l4Jm1"], "l4Jm1", "parcelRequire3f98")

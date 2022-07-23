@@ -96,8 +96,8 @@ window.addEventListener('load', () => {
           start: 'top 30%',
           onEnter: () => {
             if (sceneTl.progress() === 0 && document.readyState === 'complete')
-              console.log(document.readyState)
-            sceneTl.play()
+              // console.log(document.readyState)
+              sceneTl.play()
           }
         },
         autoAlpha: 1,

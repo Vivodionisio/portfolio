@@ -1,5 +1,4 @@
 // Icons 'fan out' animate along path
-
 import { rmvRedundantArrow } from '../cursor/cursor'
 import { makeIconButtons } from './text_anim'
 
