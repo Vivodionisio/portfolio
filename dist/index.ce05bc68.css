@@ -208,7 +208,7 @@ g#columns, #columns1, #columns2, #columns3 {
   }
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 600px) {
   .topbar {
     flex-direction: column;
   }
@@ -229,9 +229,7 @@ g#columns, #columns1, #columns2, #columns3 {
   .topbar .nav a {
     margin-left: 0;
   }
-}
 
-@media screen and (max-width: 600px) {
   .greeting {
     left: 40px;
   }
