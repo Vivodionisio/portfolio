@@ -848,7 +848,6 @@ function arrowToDot() {
 }
 // Styles for mouse/window interaction
 document.addEventListener("mouseleave", ()=>{
-    console.log("beautiful");
     gsap.set(".custom-cursor", {
         autoAlpha: 0
     });

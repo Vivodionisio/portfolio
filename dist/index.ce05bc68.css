@@ -14,7 +14,7 @@
 .topbar {
   color: var(--text-color);
   width: 100%;
-  z-index: 500;
+  z-index: 200;
   visibility: hidden;
   opacity: 0;
   justify-content: space-between;

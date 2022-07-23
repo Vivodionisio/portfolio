@@ -121,7 +121,7 @@ a:hover {
   opacity: 0;
   width: 35px;
   height: 35px;
-  z-index: 500;
+  z-index: 900;
   pointer-events: none;
   transition: opacity 1s;
   position: fixed;

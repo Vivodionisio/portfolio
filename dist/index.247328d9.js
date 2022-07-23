@@ -524,7 +524,6 @@ const elements = [
     ...aboutItem,
     ...aboutSpan
 ];
-console.log(aboutSpan);
 elements.forEach((element)=>{
     gsap.from(element, {
         scrollTrigger: {

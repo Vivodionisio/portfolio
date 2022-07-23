@@ -11,9 +11,6 @@
   /* cursor: pointer; */
 }
 
-.stickman-1 {
-  /* cursor: pointer; */
-}
 .stickman-1,
 .shadow-1 {
   opacity: 1;
@@ -51,7 +48,7 @@
 
 .bag-1 {
   opacity: 1;
-  cursor: pointer;
+  cursor: none;
 }
 
 .bag-2,

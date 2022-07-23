@@ -20,7 +20,7 @@
 
 .bag-1 {
   opacity: 1;
-  cursor: pointer;
+  cursor: none;
 }
 
 .bag-2, .bag-3, .bag-4, .bag-shadow-2, .bag-shadow-3, .bag-shadow-4, .bag-shadow-d-1, .bag-shadow-d-2 {
