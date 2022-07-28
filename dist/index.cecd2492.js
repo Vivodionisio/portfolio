@@ -792,6 +792,10 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 // Remove Arrow after stickman animation is complete
 parcelHelpers.export(exports, "rmvRedundantArrow", ()=>rmvRedundantArrow);
+// pick the write event type -
+// Touch, pointer and mouse events (latter limited)
+// Query window to find out what the divice is capable of doing.
+// hi res or low (finger) pointer types
 const body = document.querySelector("body");
 const hero = document.querySelector(".hero");
 const stickmanScene = document.querySelector(".stickman-scene");
@@ -803,7 +807,9 @@ const anchorTags = [
 ];
 // See text_anim.js for cursor animations related to the tech icons
 let y, x, distance;
-body.addEventListener("mousemove", (e)=>{
+body.addEventListener("pointermove", (e)=>{
+    console.log(e);
+    if (e.pointerType === "touch") return;
     // Set position for svg (replacement cursor)
     x = e.clientX;
     y = e.clientY;
@@ -812,7 +818,7 @@ body.addEventListener("mousemove", (e)=>{
       opacity: 1;`);
 });
 // call rotate and scale
-stickmanScene.addEventListener("mousemove", (e)=>{
+stickmanScene.addEventListener("pointermove", (e)=>{
     rotate();
     scale();
 });
@@ -854,10 +860,11 @@ function calculateDistance(mouseX, mouseY) {
     return Math.floor(Math.sqrt(Math.pow(mouseX - (rect.left + rect.width / 2), 2) + Math.pow(mouseY - (rect.top + rect.height / 2), 2)));
 }
 // Styles for mouse/stickman-scene interaction
-stickmanScene.addEventListener("mouseenter", dotToArrow);
-stickmanScene.addEventListener("mouseleave", arrowToDot);
-hero.addEventListener("mouseleave", arrowToDot);
-function dotToArrow() {
+stickmanScene.addEventListener("pointerenter", dotToArrow);
+stickmanScene.addEventListener("pointerleave", arrowToDot);
+hero.addEventListener("pointerleave", arrowToDot);
+function dotToArrow(e) {
+    if (e.pointerType === "touch") return;
     gsap.set(".dot-cursor", {
         autoAlpha: 0
     });
@@ -865,7 +872,8 @@ function dotToArrow() {
         autoAlpha: 1
     });
 }
-function arrowToDot() {
+function arrowToDot(e) {
+    if (e.pointerType === "touch") return;
     gsap.set(".dot-cursor", {
         autoAlpha: 1
     });
@@ -877,7 +885,8 @@ function arrowToDot() {
     });
 }
 // Styles for mouse/window interaction
-document.addEventListener("mouseleave", ()=>{
+document.addEventListener("pointerleave", (e)=>{
+    if (e.pointerType === "touch") return;
     gsap.set(".custom-cursor", {
         autoAlpha: 0
     });
@@ -889,17 +898,19 @@ function rmvRedundantArrow() {
     gsap.to(".dot-cursor", {
         autoAlpha: 1
     });
-    stickmanScene.removeEventListener("mouseenter", dotToArrow);
-    stickmanScene.removeEventListener("mouseleave", arrowToDot);
+    stickmanScene.removeEventListener("pointerenter", dotToArrow);
+    stickmanScene.removeEventListener("pointerleave", arrowToDot);
 }
 anchorTags.forEach((a)=>{
-    a.addEventListener("mouseenter", ()=>{
+    a.addEventListener("pointerenter", (e)=>{
+        if (e.pointerType === "touch") return;
         gsap.to(".dot-cursor", {
             scale: 0,
             autoAlpha: 0
         });
     });
-    a.addEventListener("mouseleave", ()=>{
+    a.addEventListener("pointerleave", (e)=>{
+        if (e.pointerType === "touch") return;
         gsap.to(".dot-cursor", {
             scale: 1,
             autoAlpha: 1
