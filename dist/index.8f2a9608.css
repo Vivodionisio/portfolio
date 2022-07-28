@@ -28,7 +28,6 @@
 
 .exibit > div {
   height: 29.5vw;
-  max-height: 420px;
   align-items: center;
   display: flex;
   position: relative;
